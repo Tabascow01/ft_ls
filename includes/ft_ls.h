@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 12:51:03 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/06/20 14:05:43 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/06/20 14:15:07 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@
 #include <grp.h>
 #include <time.h>
 #include <stdio.h>
+#include <sys/xattr.h>
 
 typedef struct		s_ls
 {
 	struct s_ls		*next;
 	char			*option;
-	char			*str;
+	char			*pathname;
+	char			*filename;
 }					t_ls;
 
 void	ft_rec(t_ls *list);

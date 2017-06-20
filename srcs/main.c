@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 12:49:40 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/06/20 13:46:26 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/06/20 14:10:09 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int		main(int argc, char *argv[])
 		if (ft_vrf_option(list, argv[1]))
 			error_illegal_option(list);
 		else
-			ls_core(list);
+			list->option = NULL;
+		ls_core(list);
 	}
 	else
 		error_usage_end();
