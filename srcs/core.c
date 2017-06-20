@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/20 12:49:40 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/06/20 13:46:26 by mchemakh         ###   ########.fr       */
+/*   Created: 2017/06/20 13:47:20 by mchemakh          #+#    #+#             */
+/*   Updated: 2017/06/20 14:07:10 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		main(int argc, char *argv[])
+int		ls_core(t_ls *list)
 {
-	t_ls	*list;
+	int	 i;
 
-	list = ft_init_list();
-	if (argc < 1)
-		error_usage();
-	else if (argc > 0)
+	i = 0;
+	while (list->option[i])
 	{
-		if (ft_vrf_option(list, argv[1]))
-			error_illegal_option(list);
-		else
-			ls_core(list);
+		if (ft_vrf_rec(list->option[i]))// -R
+			ft_rec(list);
+		if (ft_vrf_all(list->option[i]))// -a
+			ft_all(list);
+		if (ft_vrf_long(list->option[i]))// -l
+			ft_long(list);
+		if (ft_vrf_rev(list->option[i]))// -r
+			ft_rev(list);
+		if (ft_vrf_time(list->option[i]))// -t
+			ft_time(list);
+		i++;
 	}
-	else
-		error_usage_end();
 	return (0);
 }

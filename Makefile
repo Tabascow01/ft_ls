@@ -6,7 +6,7 @@
 #    By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/10 04:47:56 by mchemakh          #+#    #+#              #
-#    Updated: 2017/06/20 13:06:08 by mchemakh         ###   ########.fr        #
+#    Updated: 2017/06/20 13:58:28 by mchemakh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = ft_ls
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror# -fsanitize=address -O1 -fno-optimize-sibling-calls
 
-SRCS_NAME = main.c init.c parser.c clear.c error.c option.c verif.c
+SRCS_NAME = main.c init.c parser.c clear.c error.c option.c verif.c core.c ft_recursive.c ft_long.c ft_all.c ft_reverse.c ft_time.c
 
 SRCS_PATH = srcs/
 
