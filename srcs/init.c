@@ -20,5 +20,6 @@ t_ls	*ft_init_list()
 	list->option = 0;
 	list->pathname = NULL;
 	list->filename = NULL;
+	list->default_dir = ".";
 	return (list);
 }

@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-void	ft_recursive(t_ls *list)
+void	ft_rec(t_ls *list)
 {
-
+	list->next = NULL;
 }

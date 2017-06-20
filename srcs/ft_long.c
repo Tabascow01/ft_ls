@@ -14,5 +14,5 @@
 
 void	ft_long(t_ls *list)
 {
-
+	list->next = NULL;
 }

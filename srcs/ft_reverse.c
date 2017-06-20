@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-void	ft_reverse(t_ls *list)
+void	ft_rev(t_ls *list)
 {
-
+	list->next = NULL;
 }

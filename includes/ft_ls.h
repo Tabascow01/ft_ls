@@ -30,6 +30,7 @@ typedef struct		s_ls
 	char			*option;
 	char			*pathname;
 	char			*filename;
+	char			*default_dir;
 }					t_ls;
 
 void	ft_rec(t_ls *list);

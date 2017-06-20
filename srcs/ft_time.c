@@ -14,5 +14,5 @@
 
 void	ft_time(t_ls *list)
 {
-
+	list->next = NULL;
 }
