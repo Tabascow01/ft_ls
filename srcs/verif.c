@@ -27,6 +27,8 @@ int		ft_vrf_option(t_ls *list, char *argv)
 		list->option[i++] = 'r';
 	if (ft_strchr(argv, 't'))
 		list->option[i++] = 't';
+	if (!ft_strcmp(argv, "./"))// TO CHANGE
+	list->option[i++] = ' ';
 	if (list->option[0] != '\0')
 		return (1);
 	return (0);

@@ -17,6 +17,7 @@ int		ls_core(t_ls *list)
 	int	 i;
 
 	i = 0;
+	ft_init_ls(list);
 	while (list->option[i])
 	{
 		if (ft_vrf_rec(list->option[i]))// -R
