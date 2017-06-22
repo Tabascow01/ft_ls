@@ -17,17 +17,16 @@ int		main(int argc, char *argv[])
 	t_ls	*list;
 
 	list = ft_init_list();
-	if (argc < 1)
+	if (argc > 3)
 		error_usage();
-	else if (argc > 0)
+	else if (argc < 4)
 	{
-		if (ft_vrf_option(list, argv[1]))
-			error_illegal_option(list);
-		else
-			list->option = NULL;
+		if (argv != NULL)
+			if (!ft_vrf_option(list, argv))
+				error_illegal_option(list);
+		ft_printf("option: %s\n", list->option);
+		ft_printf("pathname: %s\ndirename: %s\nfilename: %s\n", list->pathname, list->dirname, list->filename);
 		ls_core(list);
 	}
-	else
-		error_usage_end();
 	return (0);
 }

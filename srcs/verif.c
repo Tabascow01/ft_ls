@@ -12,25 +12,63 @@
 
 #include "ft_ls.h"
 
-int		ft_vrf_option(t_ls *list, char *argv)
+int		ft_isoption(char *str, t_ls *list)
 {
 	int i;
+	int j;
+
+	j = 0;
+	i = 0;
+	if (str != NULL && str[0] == '-')
+	{
+		i++;
+		list->option = ft_strnew(6);
+		while (str[i])
+		{
+			if (str[i] == 'R' || str[i] == 'r' || str[i] == 't'
+					|| str[i] == 'l' || str[i] == 'a')
+			{
+				list->option[j++] = str[i];
+				i++;
+			}
+			else
+			{
+				list->option[j++] = str[i];
+				list->option[j] = '\0';
+				return (0);
+			}
+		}
+		list->option[j] = '\0';
+		return (1);
+	}
+	return (0);
+}
+
+int		ft_ispath(char *str, t_ls *list)
+{
+	int i;
+	int j;
 
 	i = 0;
-	if (ft_strchr(argv,'R'))
-		list->option[i++] = 'R';
-	if (ft_strchr(argv, 'l'))
-		list->option[i++] = 'l';
-	if (ft_strchr(argv, 'a'))
-		list->option[i++] = 'a';
-	if (ft_strchr(argv, 'r'))
-		list->option[i++] = 'r';
-	if (ft_strchr(argv, 't'))
-		list->option[i++] = 't';
-	if (!ft_strcmp(argv, "./"))// TO CHANGE
-	list->option[i++] = ' ';
-	if (list->option[0] != '\0')
-		return (1);
+	j = 0;
+	if (str != NULL && str[0] != '-')
+		if ((list->pathname = ft_strdup(str)))
+			return (1);
+	return (0);
+}
+
+int		ft_vrf_option(t_ls *list, char **argv)
+{
+	if (ft_isoption(argv[1], list))
+	{
+		if (ft_ispath(argv[2], list))
+			return (1);
+		else
+			return (1);
+	}
+	else
+		if (ft_ispath(argv[1], list))
+			return (1);
 	return (0);
 }
 

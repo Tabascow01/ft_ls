@@ -18,19 +18,23 @@ int		ls_core(t_ls *list)
 
 	i = 0;
 	ft_init_ls(list);
-	while (list->option[i])
+	if (list->option)
 	{
-		if (ft_vrf_rec(list->option[i]))// -R
-			ft_rec(list);
-		if (ft_vrf_all(list->option[i]))// -a
-			ft_all(list);
-		if (ft_vrf_long(list->option[i]))// -l
-			ft_long(list);
-		if (ft_vrf_rev(list->option[i]))// -r
-			ft_rev(list);
-		if (ft_vrf_time(list->option[i]))// -t
-			ft_time(list);
-		i++;
+		while (list->option[i])
+		{
+			if (ft_vrf_all(list->option[i]))// -a
+				ft_all(list);
+			if (ft_vrf_rec(list->option[i]))// -R
+				ft_rec(list);
+			if (ft_vrf_long(list->option[i]))// -l
+				ft_long(list);
+			if (ft_vrf_rev(list->option[i]))// -r
+				ft_rev(list);
+			if (ft_vrf_time(list->option[i]))// -t
+				ft_time(list);
+			i++;
+		}
+		ft_strdel(&list->option);
 	}
 	return (0);
 }

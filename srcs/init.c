@@ -12,6 +12,11 @@
 
 #include "ft_ls.h"
 
+void	ft_init_ls(t_ls *list)
+{
+	ft_get_dir(list);
+}
+
 t_ls	*ft_init_list()
 {
 	t_ls *list;
@@ -19,6 +24,7 @@ t_ls	*ft_init_list()
 	list = ft_memalloc(sizeof(list));
 	list->option = 0;
 	list->pathname = NULL;
+	list->dirname = NULL;
 	list->filename = NULL;
 	list->default_dir = ".";
 	return (list);

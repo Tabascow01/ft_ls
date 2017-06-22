@@ -10,7 +10,7 @@ int		main(void)
 	ssize_t			size;
 	char			*buf;
 	time_t			clock;
-	char			*time;
+	char			*strtime;
 
 	buf = NULL;
 	directory = opendir(".");// FOR DIR
@@ -31,9 +31,10 @@ int		main(void)
 	size = listxattr("./Makefile", buf, 32, XATTR_NOFOLLOW);
 	printf("[%ld]\n",size);
 
-	time = (char *)malloc(sizeof(char) * 26);
-	time = ctime(&clock);
-	printf("[%s]\n", time);
+	strtime = (char *)malloc(sizeof(char) * 26);
+	clock = time(&clock);
+	strtime = ctime(&clock);
+	printf("[%s]\n", strtime);
 
 	return (0);
 }

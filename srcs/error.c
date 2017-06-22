@@ -12,13 +12,6 @@
 
 #include "ft_ls.h"
 
-void	error_illegal_option(t_ls *list)
-{
-	ft_putstr_fd("ls: illegal option -- ", 2);
-	ft_putstr_fd(list->option, 2);
-	ft_putchar_fd('\n', 2);
-}
-
 void	error_usage()
 {
 	ft_putendl_fd("usage: ls [-lRart] [file ...]", 2);
@@ -27,4 +20,12 @@ void	error_usage()
 void	error_usage_end()
 {
 		ft_putendl_fd("usage: ls [-lRart] [file ...]", 2);
+}
+
+void	error_illegal_option(t_ls *list)
+{
+	ft_putstr_fd("ls: illegal option -- ", 2);
+	ft_putstr_fd(list->option, 2);
+	ft_putchar_fd('\n', 2);
+	error_usage();
 }
