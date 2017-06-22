@@ -14,9 +14,13 @@
 
 char	*ft_strnew(size_t size)
 {
+	size_t	min;
 	char	*strmemalloc;
 
-	strmemalloc = (char*)malloc(size + 1);
+	min = 0;
+	strmemalloc = NULL;
+	if (size > min)
+		strmemalloc = (char*)malloc(size + 1 * sizeof(char));
 	if (strmemalloc != NULL)
 	{
 		ft_bzero(strmemalloc, size + 1);

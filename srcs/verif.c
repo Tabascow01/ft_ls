@@ -52,23 +52,34 @@ int		ft_ispath(char *str, t_ls *list)
 	i = 0;
 	j = 0;
 	if (str != NULL && str[0] != '-')
-		if ((list->pathname = ft_strdup(str)))
+	{
+		list->pathname = ft_strnew(ft_strlen(str));
+		list->pathname = ft_memcpy(list->pathname, str, ft_strlen(str));
+		if(ft_strlen(list->pathname) > 0)
 			return (1);
+	}
 	return (0);
 }
 
 int		ft_vrf_option(t_ls *list, char **argv)
 {
-	if (ft_isoption(argv[1], list))
+	int i;
+
+	i = 1;
+	while (argv[i])
 	{
-		if (ft_ispath(argv[2], list))
-			return (1);
+		if (ft_isoption(argv[i], list))
+		{
+			if (ft_ispath(argv[i + 1], list))
+				return (1);
+			else
+				return (1);
+		}
 		else
-			return (1);
+			if (ft_ispath(argv[i], list))
+				return (1);
+		i++;
 	}
-	else
-		if (ft_ispath(argv[1], list))
-			return (1);
 	return (0);
 }
 

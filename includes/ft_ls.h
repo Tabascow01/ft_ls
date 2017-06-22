@@ -62,13 +62,13 @@ void	ft_all(t_ls *list);
 void	ft_rev(t_ls *list);
 void	ft_time(t_ls *list);
 
-int		ls_core(t_ls *list);
-
 int		ft_vrf_rec(char c);
 int		ft_vrf_long(char c);
 int		ft_vrf_all(char c);
 int		ft_vrf_rev(char c);
 int		ft_vrf_time(char c);
+
+int		ls_core(t_ls *list);
 
 int		ft_vrf_option(t_ls *list, char **argv);
 
