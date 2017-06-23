@@ -12,12 +12,47 @@
 
 #include "ft_ls.h"
 
-void	ft_init_ls(t_ls *list)
+void				ft_init_ls(t_ls *list)
 {
 	ft_get_dir(list);
 }
 
-t_ls	*ft_init_list()
+static t_file		*ft_init_file()
+{
+	t_file	*list;
+
+	list = ft_memalloc(sizeof(list));
+	list->file_id = 0;
+	list->path = NULL;
+	list->rights = NULL;
+	list->name = NULL;
+	list->date = NULL;
+	list->size = NULL;
+	list->user = NULL;
+	list->user = NULL;
+	list->grp = NULL;
+	list->next = NULL;
+	return (list);
+}
+
+static t_dir		*ft_init_dir()
+{
+	t_dir	*list;
+
+	list = ft_memalloc(sizeof(list));
+	list->dir_id = 0;
+	list->path = NULL;
+	list->name = NULL;
+	list->rights = NULL;
+	list->date = NULL;
+	list->user = NULL;
+	list->grp = NULL;
+	list->next = NULL;
+	list->t_file = ft_init_file();
+	return (list);
+}
+
+t_ls				*ft_init_list()
 {
 	t_ls *list;
 
@@ -27,5 +62,7 @@ t_ls	*ft_init_list()
 	list->dirname = NULL;
 	list->filename = NULL;
 	list->default_dir = ".";
+	list->next = NULL;
+	list->t_dir = ft_init_dir();
 	return (list);
 }

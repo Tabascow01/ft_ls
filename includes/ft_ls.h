@@ -27,19 +27,32 @@
 typedef struct		s_ls
 {
 	struct s_ls		*next;
-	int				repo_id;
 	char			*option;
 	char			*pathname;
 	char			**filename;
 	char			**dirname;
 	char			*default_dir;
-	void			*t_file;
+	void			*t_dir;
 }					t_ls;
+
+typedef struct		s_dir
+{
+	struct	s_dir	*next;
+	int				dir_id;
+	char			*path;
+	char			*name;
+	char			*rights;
+	char			*date;
+	char			*user;
+	char			*grp;
+	void			*t_file;
+}					t_dir;
 
 typedef struct		s_file
 {
 	struct	s_file	*next;
 	int				file_id;
+	char			*path;
 	char			*rights;
 //	char			*uid;// ???
 	char			*name;
