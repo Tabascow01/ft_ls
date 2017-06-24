@@ -17,52 +17,51 @@ void				ft_init_ls(t_ls *list)
 	ft_get_dir(list);
 }
 
-static t_file		*ft_init_file()
+t_file		*ft_init_file()
 {
-	t_file	*list;
+	t_file	*list_file;
 
-	list = ft_memalloc(sizeof(list));
-	list->file_id = 0;
-	list->path = NULL;
-	list->rights = NULL;
-	list->name = NULL;
-	list->date = NULL;
-	list->size = NULL;
-	list->user = NULL;
-	list->user = NULL;
-	list->grp = NULL;
-	list->next = NULL;
-	return (list);
+	list_file = (t_file *)ft_memalloc(sizeof(t_file));
+	list_file->file_id = 0;
+	list_file->path = NULL;
+	list_file->rights = NULL;
+	list_file->name = NULL;
+	list_file->date = NULL;
+	list_file->size = NULL;
+	list_file->user = NULL;
+	list_file->user = NULL;
+	list_file->grp = NULL;
+	list_file->next = NULL;
+	return (list_file);
 }
 
-static t_dir		*ft_init_dir()
+t_dir		*ft_init_dir()
 {
-	t_dir	*list;
+	t_dir	*list_dir;
 
-	list = ft_memalloc(sizeof(list));
-	list->dir_id = 0;
-	list->path = NULL;
-	list->name = NULL;
-	list->rights = NULL;
-	list->date = NULL;
-	list->user = NULL;
-	list->grp = NULL;
-	list->next = NULL;
-	list->t_file = ft_init_file();
-	return (list);
+	list_dir = (t_dir *)ft_memalloc(sizeof(t_dir));
+	list_dir->dir_id = 0;
+	list_dir->path = NULL;
+	list_dir->name = NULL;
+	list_dir->rights = NULL;
+	list_dir->date = NULL;
+	list_dir->user = NULL;
+	list_dir->grp = NULL;
+	list_dir->next = NULL;
+	return (list_dir);
 }
 
 t_ls				*ft_init_list()
 {
-	t_ls *list;
+	t_ls	*list;
 
-	list = ft_memalloc(sizeof(list));
+	list = (t_ls *)ft_memalloc(sizeof(t_ls));
 	list->option = 0;
 	list->pathname = NULL;
 	list->dirname = NULL;
 	list->filename = NULL;
 	list->default_dir = ".";
 	list->next = NULL;
-	list->t_dir = ft_init_dir();
+	list->t_dir = NULL;
 	return (list);
 }

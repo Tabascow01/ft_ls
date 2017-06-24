@@ -46,8 +46,8 @@ int		ft_isoption(char *str, t_ls *list)
 
 int		ft_ispath(char *str, t_ls *list)
 {
-	int i;
-	int j;
+	int			i;
+	int			j;
 
 	i = 0;
 	j = 0;
@@ -66,6 +66,8 @@ int		ft_vrf_option(t_ls *list, char **argv)
 	int i;
 
 	i = 1;
+	if (argv == NULL || argv[1][0] == '\0')
+		return (1);
 	while (argv[i])
 	{
 		if (ft_isoption(argv[i], list))

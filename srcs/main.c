@@ -21,11 +21,11 @@ int		main(int argc, char *argv[])
 		error_usage();
 	else if (argc < 4)
 	{
-		if (argv != NULL)
+		if (argv[1] != NULL)
 			if (!ft_vrf_option(list, argv))
 				error_illegal_option(list);
-		ft_printf("option: %s\n", list->option);
-		ft_printf("pathname: %s\ndirename: %s\nfilename: %s\n", list->pathname, list->dirname, list->filename);
+		printf("option: %s\n", list->option);
+		printf("pathname: %s\n", list->pathname);
 		ls_core(list);
 	}
 	return (0);
