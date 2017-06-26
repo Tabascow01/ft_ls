@@ -14,8 +14,8 @@
 
 int		ft_isoption(char *str, t_ls *list)
 {
-	int i;
-	int j;
+	int			i;
+	int			j;
 
 	j = 0;
 	i = 0;
@@ -68,8 +68,11 @@ int		ft_ispath(char *str, t_ls *list)
 			list = list->next;
 		list->next = ft_init_list();
 		list = list->next;
-		list->option = ft_strnew(6);
-		list->option = ft_memcpy(list->option, begin->option, ft_strlen(begin->option));
+		if (begin->option != NULL)
+		{
+			list->option = ft_strnew(6);
+			list->option = ft_memcpy(list->option, begin->option, ft_strlen(begin->option));
+		}
 		list->pathname = ft_strnew(ft_strlen(str));
 		list->pathname = ft_memcpy(list->pathname, str, ft_strlen(str));
 		if (ft_strlen(list->pathname) > 0)
@@ -100,10 +103,8 @@ int		ft_vrf_option(t_ls *list, char **argv)
 			else
 				return (1);
 		}
-		else if (!ft_isoption(argv[i], list) && i > 1)
+		else if (!ft_ispath(argv[i], list))
 			error_noexist();
-		else
-			ft_ispath(argv[i], list);
 		i++;
 	}
 	return (1);

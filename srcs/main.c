@@ -15,20 +15,17 @@
 int		main(int argc, char *argv[])
 {
 	t_ls	*list;
-	t_ls	*begin;//
+	t_ls	*begin;
 	int		i;//
 
 	i = 0;
 	list = ft_init_list();
 	begin = list;
-//	if (argc > 3)
-//		error_usage();
-/*else*/ 
 	if (argc > 1)
 	{
 		if (!ft_vrf_option(list, argv))
 			error_illegal_option(list, argc);
-//		ls_core(list);
+		ls_core(begin);
 		while (list)
 		{
 			i++;

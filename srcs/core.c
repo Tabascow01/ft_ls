@@ -17,8 +17,6 @@ int		ls_core(t_ls *list)
 	int	 i;
 
 	i = 0;
-	ft_init_ls(list);
-/*
 	if (list->option && list->next == NULL) //
 	{
 		while (list->option[i])
@@ -35,8 +33,7 @@ int		ls_core(t_ls *list)
 				ft_time(list);
 			i++;
 		}
-//		ft_strdel(&list->option);
+//		ft_strdel(&list->option);// REMOVE AFTER PRINT
 	}
-*/
 	return (0);
 }
