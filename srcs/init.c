@@ -47,6 +47,7 @@ t_dir		*ft_init_dir()
 	list_dir->date = NULL;
 	list_dir->user = NULL;
 	list_dir->grp = NULL;
+	list_dir->t_file = ft_init_file();
 	list_dir->next = NULL;
 	return (list_dir);
 }
@@ -62,6 +63,6 @@ t_ls				*ft_init_list()
 	list->filename = NULL;
 	list->default_dir = ".";
 	list->next = NULL;
-	list->t_dir = NULL;
+	list->t_dir = ft_init_dir();;
 	return (list);
 }

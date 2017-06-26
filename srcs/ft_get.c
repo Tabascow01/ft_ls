@@ -18,3 +18,15 @@ int		ft_get_dir(t_ls *list)
 		return (1);
 	return (0);
 }
+
+int		ft_get_ls(t_ls *list)
+{
+	list->next = NULL;
+	return (0);
+}
+
+int		ft_get_file(t_ls *list)
+{
+	list->next = NULL;
+	return (0);
+}

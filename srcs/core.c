@@ -15,16 +15,11 @@
 int		ls_core(t_ls *list)
 {
 	int	 i;
-	t_file	*lst_f;
-	t_dir	*lst_d;
 
 	i = 0;
 	ft_init_ls(list);
-	lst_d = ft_init_dir();
-	lst_f = ft_init_file();
-	lst_d->t_file = lst_f;
-	list->t_dir = lst_d;
-	if (list->option)
+/*
+	if (list->option && list->next == NULL) //
 	{
 		while (list->option[i])
 		{
@@ -40,7 +35,8 @@ int		ls_core(t_ls *list)
 				ft_time(list);
 			i++;
 		}
-		ft_strdel(&list->option);
+//		ft_strdel(&list->option);
 	}
+*/
 	return (0);
 }

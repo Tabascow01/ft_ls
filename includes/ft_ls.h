@@ -62,8 +62,9 @@ typedef struct		s_file
 	char			*grp;
 }					t_file;
 
-
+int		ft_get_ls(t_ls *list);
 int		ft_get_dir(t_ls *list);
+int		ft_get_file(t_ls *list);
 
 int		ft_ispath(char *argv, t_ls *list);
 int		ft_isoption(char *argv, t_ls *list);
@@ -90,8 +91,8 @@ t_file	*ft_init_file();
 t_dir	*ft_init_dir();
 t_ls	*ft_init_list();
 
-void	error_illegal_option(t_ls *list);
+void	error_noexist();
+void	error_illegal_option(t_ls *list, int argc);
 void	error_usage();
-void	error_usage_end();
 
 #endif

@@ -19,9 +19,9 @@ int		ft_isoption(char *str, t_ls *list)
 
 	j = 0;
 	i = 0;
-	if (str != NULL && str[0] == '-')
+	if (list->option == NULL && str != NULL && str[0] == '-')
 	{
-		i++;
+		i = 1;
 		list->option = ft_strnew(6);
 		while (str[i])
 		{
@@ -46,17 +46,37 @@ int		ft_isoption(char *str, t_ls *list)
 
 int		ft_ispath(char *str, t_ls *list)
 {
-	int			i;
-	int			j;
+	static int	nbpath;
+	t_ls		*begin;
 
-	i = 0;
-	j = 0;
-	if (str != NULL && str[0] != '-')
+	begin = NULL;
+//	printf("path[%d]\n",nbpath);
+	if (str != NULL && str[0] != '-' && nbpath < 1)
 	{
 		list->pathname = ft_strnew(ft_strlen(str));
 		list->pathname = ft_memcpy(list->pathname, str, ft_strlen(str));
 		if(ft_strlen(list->pathname) > 0)
+		{
+			nbpath += 1;
 			return (1);
+		}
+	}
+	else if (str != NULL && str[0] != '-' && nbpath > 0)
+	{
+		begin = list;
+		while (list->next)
+			list = list->next;
+		list->next = ft_init_list();
+		list = list->next;
+		list->option = ft_strnew(6);
+		list->option = ft_memcpy(list->option, begin->option, ft_strlen(begin->option));
+		list->pathname = ft_strnew(ft_strlen(str));
+		list->pathname = ft_memcpy(list->pathname, str, ft_strlen(str));
+		if (ft_strlen(list->pathname) > 0)
+		{
+			nbpath += 1;
+			return (1);
+		}
 	}
 	return (0);
 }
@@ -70,19 +90,23 @@ int		ft_vrf_option(t_ls *list, char **argv)
 		return (1);
 	while (argv[i])
 	{
-		if (ft_isoption(argv[i], list))
+		if (ft_isoption(argv[i], list) && i == 1)
 		{
-			if (ft_ispath(argv[i + 1], list))
-				return (1);
+			if (argv[i + 1] != NULL)
+			{
+				i += 1;
+				ft_ispath(argv[i], list);
+			}
 			else
 				return (1);
 		}
+		else if (!ft_isoption(argv[i], list) && i > 1)
+			error_noexist();
 		else
-			if (ft_ispath(argv[i], list))
-				return (1);
+			ft_ispath(argv[i], list);
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
 int		ft_vrf_rec(char c)
