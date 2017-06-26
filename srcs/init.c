@@ -14,7 +14,7 @@
 
 void				ft_init_ls(t_ls *list)
 {
-	ft_get_dir(list);
+	ft_get_ls(list);
 }
 
 t_file		*ft_init_file()

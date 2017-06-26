@@ -27,11 +27,15 @@
 typedef struct		s_ls
 {
 	struct s_ls		*next;
+	DIR				*directory;
 	char			*option;
 	char			*pathname;
 	char			**filename;
 	char			**dirname;
 	char			*default_dir;
+	struct dirent	*dir_ent;
+	struct stat		*file_stat;
+	struct pswwd	*passwd;
 	void			*t_dir;
 }					t_ls;
 
@@ -62,9 +66,12 @@ typedef struct		s_file
 	char			*grp;
 }					t_file;
 
+int		ft_stock_dir_infos(t_ls *list);
+
 int		ft_get_ls(t_ls *list);
 int		ft_get_dir(t_ls *list);
 int		ft_get_file(t_ls *list);
+int		ft_get_infos(t_ls *list);
 
 int		ft_ispath(char *argv, t_ls *list);
 int		ft_isoption(char *argv, t_ls *list);
