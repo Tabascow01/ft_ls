@@ -17,12 +17,15 @@ int		ft_get_dir(t_ls *list)
 	if ((directory = opendir(list->pathname)))
 	{
 		list->directory = directory;
-		if ((dir_ent = readdir(directory)))
+		while ((dir_ent = readdir(list->directory)))
 		{
+			printf("dir_n{%s}\n",dir_ent->d_name);
 			list->dir_ent = dir_ent;
+//			list = list->next;
 //			ft_stock_dir_infos(list);
-			return (1);
 		}
+		if (list->dir_ent != NULL)
+			return (1);
 	}
 	return (0);
 }
@@ -33,9 +36,11 @@ int		ft_get_ls(t_ls *list)
 
 	begin = list;
 	if (!list->next)
+	{
 		if(ft_get_dir(list))
 			if (ft_get_file(list))
 				return (1);
+	}
 	while (list)
 	{
 		if (!ft_get_dir(list))
@@ -49,14 +54,17 @@ int		ft_get_ls(t_ls *list)
 
 int		ft_get_file(t_ls *list)
 {
+	int				i;
 	struct stat		f_stat;
 
+	i = 0;
 	if (list->dir_ent->d_type == 4)
 	{
 		stat(list->pathname, &f_stat);
 		list->file_stat = &f_stat;
 		return (1);
 	}
+	return (1);
 	return (0);
 }
 
