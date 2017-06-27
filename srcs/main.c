@@ -17,7 +17,9 @@ int		main(int argc, char *argv[])
 	t_ls	*list;
 	t_ls	*begin;
 	int		i;//
+	int		j;//
 
+	j = 0;
 	i = 0;
 	list = ft_init_list();
 	begin = list;
@@ -29,21 +31,16 @@ int		main(int argc, char *argv[])
 		while (list)
 		{
 			i++;
+			printf("id{%d}\n",list->id);
 			printf("option: %s\n", list->option);
 			printf("pathname: %s\n", list->pathname);
 			printf("nblist: %d\n", i);
-			if (list->dir_ent)
-			{
-				printf("dir_ent->name[%s]\n",list->dir_ent->d_name);
-				printf("dir_ent->namlen[%d]\n",list->dir_ent->d_namlen);
-				printf("dir_ent->type[%u]\n",list->dir_ent->d_type);
-			}
-			if (list->file_stat)
-			{
-				printf("file_stat->mode[%x]\n",list->file_stat->st_mode);
-				printf("file_stat->size[%lld]\n",list->file_stat->st_size);
-				printf("file_stat->flags[%d]\n",list->file_stat->st_flags);
-			}
+			j = 0;
+			while(list->dirname[j])
+				printf("dirname[%s]\n",list->dirname[j++]);
+			j = 0;
+			while (list->filename[j])
+				printf("filename[%s]\n",list->filename[j++]);
 			list = list->next;
 		}
 	}
@@ -53,21 +50,16 @@ int		main(int argc, char *argv[])
 		while (list)
 		{
 			i++;
+			printf("id{%d}\n",list->id);
 			printf("option: %s\n", list->option);
 			printf("pathname: %s\n", list->pathname);
 			printf("nblist: %d\n", i);
-			if (list->dir_ent)
-			{
-				printf("dir_ent->name[%s]\n",list->dir_ent->d_name);
-				printf("dir_ent->namlen[%d]\n",list->dir_ent->d_namlen);
-				printf("dir_ent->type[%u]\n",list->dir_ent->d_type);
-			}
-			if (list->file_stat)
-			{
-				printf("file_stat->mode[%x]\n",list->file_stat->st_mode);
-				printf("file_stat->size[%lld]\n",list->file_stat->st_size);
-				printf("file_stat->flags[%d]\n",list->file_stat->st_flags);
-			}
+			j = 0;
+			while(list->dirname[j])
+				printf("dirname[%s]\n",list->dirname[j++]);
+			j = 0;
+			while (list->filename[j])
+				printf("filename[%s]\n",list->filename[j++]);
 			list = list->next;
 		}
 	}

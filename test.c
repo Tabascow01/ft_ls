@@ -13,7 +13,7 @@ int		main(void)
 	char			*strtime;
 
 	buf = NULL;
-	directory = opendir(".");// FOR DIR
+	directory = opendir("./includes/");// FOR DIR
 	dir_ent = readdir(directory);
 	printf("[%s]\n",dir_ent->d_name);
 

@@ -54,9 +54,11 @@ t_dir		*ft_init_dir()
 
 t_ls				*ft_init_list()
 {
-	t_ls	*list;
+	t_ls		*list;
+	static int	id;
 
 	list = (t_ls *)ft_memalloc(sizeof(t_ls));
+	list->id = id;
 	list->option = 0;
 	list->pathname = NULL;
 	list->dirname = NULL;

@@ -50,13 +50,13 @@ int		ft_ispath(char *str, t_ls *list)
 	t_ls		*begin;
 
 	begin = NULL;
-//	printf("path[%d]\n",nbpath);
 	if (str != NULL && str[0] != '-' && nbpath < 1)
 	{
 		list->pathname = ft_strnew(ft_strlen(str));
 		list->pathname = ft_memcpy(list->pathname, str, ft_strlen(str));
 		if(ft_strlen(list->pathname) > 0)
 		{
+			list->id = nbpath;
 			nbpath += 1;
 			return (1);
 		}
@@ -77,6 +77,7 @@ int		ft_ispath(char *str, t_ls *list)
 		list->pathname = ft_memcpy(list->pathname, str, ft_strlen(str));
 		if (ft_strlen(list->pathname) > 0)
 		{
+			list->id = nbpath;
 			nbpath += 1;
 			return (1);
 		}
