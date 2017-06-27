@@ -33,9 +33,18 @@ int		ft_isoption(char *str, t_ls *list)
 			}
 			else
 			{
-				list->option[j++] = str[i];
-				list->option[j] = '\0';
-				return (0);
+				if (i > 0)
+				{
+					list->option[j++] = str[i];
+					list->option[j] = '\0';
+					error_illegal_option(list);
+					return (0);
+				}
+				else
+				{
+					list->option[j] = '\0';
+					return (1);
+				}
 			}
 		}
 		list->option[j] = '\0';

@@ -14,5 +14,6 @@
 
 void	ft_rec(t_ls *list)
 {
+	printf("ft_recursive()\n");
 	list->next = NULL;
 }

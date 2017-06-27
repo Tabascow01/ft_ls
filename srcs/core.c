@@ -21,7 +21,6 @@ int		ft_proc_option(t_ls *list)
 	i = 0;
 	if (!ft_init_ls(list))
 		return (0);
-/*
 	while (begin->option[i])
 	{
 		if (ft_vrf_all(begin->option[i]))// -a
@@ -36,7 +35,8 @@ int		ft_proc_option(t_ls *list)
 			ft_time(list);
 		i++;
 	}
-*/
+	if (i > 0)
+		return (1);
 	return (0);
 }
 
@@ -47,10 +47,12 @@ int		ls_core(t_ls *list)
 	i = 0;
 	if (list->option)
 	{
-		ft_proc_option(list);
+		if(!ft_proc_option(list))
+			return (0);
 //		ft_clear_option(list);
 	}
 	else
-		ft_init_ls(list);
-	return (0);
+		if (!ft_init_ls(list))
+			return (0);
+	return (1);
 }

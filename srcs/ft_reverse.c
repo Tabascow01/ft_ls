@@ -14,5 +14,6 @@
 
 void	ft_rev(t_ls *list)
 {
+	printf("ft_reverse()\n");
 	list->next = NULL;
 }

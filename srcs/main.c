@@ -26,7 +26,7 @@ int		main(int argc, char *argv[])
 	if (argc > 1)
 	{
 		if (!ft_vrf_option(list, argv))
-			error_illegal_option(list, argc);
+			error_illegal_option(list);
 		if (!ls_core(begin))
 			return (0);						// No such file or directory
 		while (list)

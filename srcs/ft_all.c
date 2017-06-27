@@ -14,5 +14,6 @@
 
 void	ft_all(t_ls *list)
 {
+	printf("ft_all()\n");
 	list->next = NULL;
 }

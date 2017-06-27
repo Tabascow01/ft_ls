@@ -27,13 +27,14 @@ void	error_usage()
 	exit(-1);
 }
 
-void	error_illegal_option(t_ls *list, int argc)
+void	error_illegal_option(t_ls *list)
 {
+
 	ft_putstr_fd("ls: illegal option -- ", 2);
-	ft_putstr_fd(list->option, 2);
-	ft_putchar_fd('\n', 2);
-	if (argc > 3)
-		error_usage();
+	if (ft_strlen(list->option) > 1)
+		ft_putchar_fd(list->option[ft_strlen(list->option) - 1], 2);
 	else
-		exit(-1);
+		ft_putstr_fd(list->option, 2);
+	ft_putchar_fd('\n', 2);
+	error_usage();
 }

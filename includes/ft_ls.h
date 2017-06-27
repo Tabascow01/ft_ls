@@ -103,7 +103,7 @@ t_dir	*ft_init_dir();
 t_ls	*ft_init_list();
 
 void	error_noexist(t_ls *list);
-void	error_illegal_option(t_ls *list, int argc);
+void	error_illegal_option(t_ls *list);
 void	error_usage();
 
 #endif

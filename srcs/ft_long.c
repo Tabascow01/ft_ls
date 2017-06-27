@@ -14,5 +14,6 @@
 
 void	ft_long(t_ls *list)
 {
+	printf("ft_long()\n");
 	list->next = NULL;
 }
