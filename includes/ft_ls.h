@@ -97,12 +97,12 @@ int		ls_core(t_ls *list);
 
 int		ft_vrf_option(t_ls *list, char **argv);
 
-void	ft_init_ls(t_ls *list);
+int		ft_init_ls(t_ls *list);
 t_file	*ft_init_file();
 t_dir	*ft_init_dir();
 t_ls	*ft_init_list();
 
-void	error_noexist();
+void	error_noexist(t_ls *list);
 void	error_illegal_option(t_ls *list, int argc);
 void	error_usage();
 

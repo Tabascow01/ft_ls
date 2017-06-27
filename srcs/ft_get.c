@@ -16,17 +16,24 @@ int		ft_get_dir(t_ls *list)
 	}
 // HAS DIR
 	directory = NULL;
-	if ((directory = opendir(list->pathname)))
+	if ((directory = opendir(list->pathname)) > 0)
 	{
 		list->directory = directory;
-		while ((dir_ent = readdir(list->directory)))
+		while ((dir_ent = readdir(list->directory)) > 0)
 		{
 			list->dir_ent = dir_ent;
 			ft_stock_name(list);
 		}
 		if (list->dir_ent != NULL)
 			return (1);
+		else
+		{
+			error_noexist(list);
+			return (0);
+		}
 	}
+	else
+		error_noexist(list);
 	return (0);
 }
 

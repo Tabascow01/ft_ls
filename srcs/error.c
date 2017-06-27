@@ -12,10 +12,13 @@
 
 #include "ft_ls.h"
 
-void	error_noexist()
+void	error_noexist(t_ls *list)
 {
-	ft_putendl_fd("{tmp} repo does not exist [match -> option]", 2);
-	exit(-1);
+	ft_putstr_fd("ls: ", 2);
+	ft_putstr_fd(list->pathname, 2);
+	ft_putendl_fd(": No such file or directory", 2);
+	if (!ft_strcmp(list->pathname, list->default_dir))
+		exit(-1);
 }
 
 void	error_usage()

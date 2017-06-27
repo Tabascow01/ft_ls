@@ -27,7 +27,8 @@ int		main(int argc, char *argv[])
 	{
 		if (!ft_vrf_option(list, argv))
 			error_illegal_option(list, argc);
-		ls_core(begin);
+		if (!ls_core(begin))
+			return (0);						// No such file or directory
 		while (list)
 		{
 			i++;
@@ -46,7 +47,8 @@ int		main(int argc, char *argv[])
 	}
 	else
 	{
-		ls_core(list);
+		if (!ls_core(list))
+			return (0);						// No such file or directory
 		while (list)
 		{
 			i++;

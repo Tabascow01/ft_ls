@@ -19,7 +19,8 @@ int		ft_proc_option(t_ls *list)
 
 	begin = list;
 	i = 0;
-	ft_init_ls(list);
+	if (!ft_init_ls(list))
+		return (0);
 /*
 	while (begin->option[i])
 	{

@@ -105,8 +105,10 @@ int		ft_vrf_option(t_ls *list, char **argv)
 				return (1);
 		}
 		else if (!ft_ispath(argv[i], list))
-			error_noexist();
-		i++;
+		{
+			error_noexist(list);
+			return (0);
+		}i++;
 	}
 	return (1);
 }

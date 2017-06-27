@@ -12,9 +12,11 @@
 
 #include "ft_ls.h"
 
-void				ft_init_ls(t_ls *list)
+int					ft_init_ls(t_ls *list)
 {
-	ft_get_ls(list);
+	if (!ft_get_ls(list))
+		return (0);
+	return (1);
 }
 
 t_file		*ft_init_file()
