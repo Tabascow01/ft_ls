@@ -30,6 +30,7 @@ static int	ft_stock_file(t_ls *list, char *path)
 	printf("f_id[%d]\n", list->t_dir->t_file->file_id);
 	printf("f_path[%s]\n", list->t_dir->t_file->path);
 	printf("f_name[%s]\n", list->t_dir->t_file->name);
+	list->t_dir->t_file = list->t_dir->t_file->next; // !
 	nbfile++;
 	return (0);
 }
@@ -52,6 +53,7 @@ static int	ft_stock_dir(t_ls *list, char *path)
 	printf("d_id[%d]\n", list->t_dir->dir_id);
 	printf("d_path[%s]\n", list->t_dir->path);
 	printf("d_name[%s]\n", list->t_dir->name);
+	list->t_dir = list->t_dir->next; // !
 	nbdir++;
 	return (0);
 }
