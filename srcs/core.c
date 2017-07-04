@@ -18,22 +18,26 @@ int		ft_proc_option(t_ls *list)
 	t_ls *begin;
 
 	begin = list;
-	i = 0;
 	if (!ft_init_ls(list))
 		return (0);
-	while (begin->option[i])
+	while (list)
 	{
-		if (ft_vrf_all(begin->option[i]))// -a
-			ft_all(list);
-		if (ft_vrf_rec(begin->option[i]))// -R
-			ft_rec(list);
-		if (ft_vrf_long(begin->option[i]))// -l
-			ft_long(list);
-		if (ft_vrf_rev(begin->option[i]))// -r
-			ft_rev(list);
-		if (ft_vrf_time(begin->option[i]))// -t
-			ft_time(list);
-		i++;
+		i = 0;
+		while (begin->option[i])
+		{
+			if (ft_vrf_all(begin->option[i]))// -a
+				ft_all(list);
+			if (ft_vrf_rec(begin->option[i]))// -R
+				ft_rec(list, list->pathname);
+			if (ft_vrf_long(begin->option[i]))// -l
+				ft_long(list);
+			if (ft_vrf_rev(begin->option[i]))// -r
+				ft_rev(list);
+			if (ft_vrf_time(begin->option[i]))// -t
+				ft_time(list);
+			i++;
+		}
+		list = list->next;
 	}
 	if (i > 0)
 		return (1);

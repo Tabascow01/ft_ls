@@ -25,7 +25,10 @@ int		ft_get_dir(t_ls *list)
 			ft_stock_name(list);
 		}
 		if (list->dir_ent != NULL)
+		{
+			closedir(directory);
 			return (1);
+		}
 		else
 		{
 			error_noexist(list);

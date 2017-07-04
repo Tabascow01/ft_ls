@@ -81,10 +81,18 @@ int		ft_ispath(char *argv, t_ls *list);
 int		ft_isoption(char *argv, t_ls *list);
 int		ft_cur_time(char **str);
 
-void	ft_rec(t_ls *list);
+int		ft_rec(t_ls *list, char *path);
+int		ft_get_rec_dir(t_ls *list);
+
 void	ft_long(t_ls *list);
+
+
 void	ft_all(t_ls *list);
+
+
 void	ft_rev(t_ls *list);
+
+
 void	ft_time(t_ls *list);
 
 int		ft_vrf_rec(char c);
