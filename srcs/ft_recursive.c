@@ -12,6 +12,28 @@
 
 #include "ft_ls.h"
 
+static int	ft_stock_file(t_ls *list, char *path)
+{
+	static int		nbfile;
+	static int		old_id;
+
+	if (list->t_dir->dir_id != old_id)
+		nbfile = 0;
+	old_id = list->t_dir->dir_id;
+	if (!list->t_dir->t_file)
+		list->t_dir->t_file = ft_init_file();
+	list->t_dir->t_file->path = ft_strnew(ft_strlen(path));
+	list->t_dir->t_file->path = ft_memcpy(list->t_dir->t_file->path, path, ft_strlen(path));
+	list->t_dir->t_file->file_id = nbfile;
+	list->t_dir->t_file->name = ft_strnew(list->dir_ent->d_namlen);
+	list->t_dir->t_file->name = ft_memcpy(list->t_dir->t_file->name, list->dir_ent->d_name, list->dir_ent->d_namlen);
+	printf("f_id[%d]\n", list->t_dir->t_file->file_id);
+	printf("f_path[%s]\n", list->t_dir->t_file->path);
+	printf("f_name[%s]\n", list->t_dir->t_file->name);
+	nbfile++;
+	return (0);
+}
+
 static int	ft_stock_dir(t_ls *list, char *path)
 {
 	static int		nbdir;
@@ -27,9 +49,9 @@ static int	ft_stock_dir(t_ls *list, char *path)
 	list->t_dir->dir_id = nbdir;
 	list->t_dir->name = ft_strnew(list->dir_ent->d_namlen);
 	list->t_dir->name = ft_memcpy(list->t_dir->name, list->dir_ent->d_name, list->dir_ent->d_namlen);
-	printf("id[%d]\n", list->t_dir->dir_id);
-	printf("path[%s]\n", list->t_dir->path);
-	printf("name[%s]\n", list->t_dir->name);
+	printf("d_id[%d]\n", list->t_dir->dir_id);
+	printf("d_path[%s]\n", list->t_dir->path);
+	printf("d_name[%s]\n", list->t_dir->name);
 	nbdir++;
 	return (0);
 }
@@ -53,15 +75,14 @@ int		ft_rec(t_ls *list, char *path)
 			finalpath = ft_strcpy(finalpath, path);
 			finalpath = ft_strjoin(finalpath, "/");
 			finalpath = ft_strjoin(finalpath, dir_ent->d_name);
-//			printf("path[%s]\n",finalpath);
 			ft_stock_dir(list, finalpath);
-//			stockage dir
 			ft_rec(list, finalpath);
 		}
-		else // tout les files
+		else if (ft_strcmp(dir_ent->d_name, ".") && ft_strcmp(dir_ent->d_name, ".."))// tout les files
 		{
-
-//			printf("rejected for recursive{%s}\n",dir_ent->d_name);
+			list->dir_ent = dir_ent;
+			finalpath = path;
+			ft_stock_file(list, finalpath);
 		}
 	}
 	closedir(directory);
