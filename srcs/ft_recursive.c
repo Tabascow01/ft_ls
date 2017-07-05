@@ -12,49 +12,95 @@
 
 #include "ft_ls.h"
 
-static int	ft_stock_file(t_ls *list, char *path)
-{
-	static int		nbfile;
-	static int		old_id;
+//  Probleme sur les fichiers contenue dans un dossier ou des dossiers
+//  separents les fichiers (dans l'ordre de l'ecture)
 
-	if (list->t_dir->dir_id != old_id)
-		nbfile = 0;
-	old_id = list->t_dir->dir_id;
-	if (!list->t_dir->t_file)
-		list->t_dir->t_file = ft_init_file();
+static int		ft_dir_exist(t_ls *list, char *path)
+{
+	t_ls	*begin;
+
+	begin = list;
+	while (list)
+	{
+//		if (!ft_strcmp(list->t_dir->path, path))
+//			return (1);
+		while (list->t_dir)
+		{
+			if (!ft_strcmp(list->t_dir->path, path))
+				return (1);
+			list->t_dir = list->t_dir->next;
+		}
+		list = list->next;
+	}
+	return (0);
+}
+
+static int		ft_stock_file(t_ls *list, char *path)
+{
+	int		newid;
+
+	newid = 0;
+	/*
+	if (ft_dir_exist(list, path))
+	{
+		printf("Coucou !\n");
+	}
+	*/
+	if (list->t_dir->t_file == NULL)
+	{
+		if (!list->t_dir->t_file)
+			list->t_dir->t_file = ft_init_file();
+		list->t_dir->t_file->file_id = 0;
+	}
+	else
+	{
+		newid = list->t_dir->t_file->file_id;
+		if (!list->t_dir->t_file->next)
+			list->t_dir->t_file->next = ft_init_file();
+		list->t_dir->t_file = list->t_dir->t_file->next; // !
+		list->t_dir->t_file->file_id = newid + 1;
+	}
 	list->t_dir->t_file->path = ft_strnew(ft_strlen(path));
 	list->t_dir->t_file->path = ft_memcpy(list->t_dir->t_file->path, path, ft_strlen(path));
-	list->t_dir->t_file->file_id = nbfile;
+//	list->t_dir->t_file->file_id = nbfile;
 	list->t_dir->t_file->name = ft_strnew(list->dir_ent->d_namlen);
 	list->t_dir->t_file->name = ft_memcpy(list->t_dir->t_file->name, list->dir_ent->d_name, list->dir_ent->d_namlen);
 	printf("f_id[%d]\n", list->t_dir->t_file->file_id);
 	printf("f_path[%s]\n", list->t_dir->t_file->path);
 	printf("f_name[%s]\n", list->t_dir->t_file->name);
-	list->t_dir->t_file = list->t_dir->t_file->next; // !
-	nbfile++;
 	return (0);
 }
 
 static int	ft_stock_dir(t_ls *list, char *path)
 {
-	static int		nbdir;
-	static int		old_id;
+	int		newid;
 
-	if (list->id != old_id)
-		nbdir = 0;
-	old_id = list->id;
+	newid = 0;
+	if (list->t_dir == NULL)
+	{
+		if (!list->t_dir)
+			list->t_dir = ft_init_dir();
+		list->t_dir->dir_id = 0;
+	}
+	else
+	{
+		newid = list->t_dir->dir_id;
+		if (!list->t_dir->next)
+			list->t_dir->next = ft_init_dir();
+		list->t_dir = list->t_dir->next;
+		list->t_dir->dir_id = newid + 1;
+	}
 	if (!list->t_dir)
 		list->t_dir = ft_init_dir();
 	list->t_dir->path = ft_strnew(ft_strlen(path));
 	list->t_dir->path = ft_memcpy(list->t_dir->path, path, ft_strlen(path));
-	list->t_dir->dir_id = nbdir;
+//	list->t_dir->dir_id = nbdir;
 	list->t_dir->name = ft_strnew(list->dir_ent->d_namlen);
 	list->t_dir->name = ft_memcpy(list->t_dir->name, list->dir_ent->d_name, list->dir_ent->d_namlen);
 	printf("d_id[%d]\n", list->t_dir->dir_id);
 	printf("d_path[%s]\n", list->t_dir->path);
 	printf("d_name[%s]\n", list->t_dir->name);
-	list->t_dir = list->t_dir->next; // !
-	nbdir++;
+
 	return (0);
 }
 
@@ -69,10 +115,10 @@ int		ft_rec(t_ls *list, char *path)
 		return (0);
 	while ((dir_ent = readdir(directory)))
 	{
+		list->dir_ent = dir_ent;
 		if (ft_strcmp(dir_ent->d_name,".") != 0 && ft_strcmp(dir_ent->d_name, "..") != 0
 				&& dir_ent->d_type == DT_DIR && dir_ent->d_name[0] != '.') // tout les directory
 		{
-			list->dir_ent = dir_ent;
 			finalpath = ft_strnew(ft_strlen(path));
 			finalpath = ft_strcpy(finalpath, path);
 			finalpath = ft_strjoin(finalpath, "/");
@@ -80,12 +126,9 @@ int		ft_rec(t_ls *list, char *path)
 			ft_stock_dir(list, finalpath);
 			ft_rec(list, finalpath);
 		}
-		else if (ft_strcmp(dir_ent->d_name, ".") && ft_strcmp(dir_ent->d_name, ".."))// tout les files
-		{
-			list->dir_ent = dir_ent;
-			finalpath = path;
-			ft_stock_file(list, finalpath);
-		}
+		else if (ft_strcmp(dir_ent->d_name, ".") && ft_strcmp(dir_ent->d_name, "..")
+					&& list->t_dir != NULL) // tout les files
+			ft_stock_file(list, path);
 	}
 	closedir(directory);
 	return (0);

@@ -14,6 +14,10 @@
 
 void	ft_long(t_ls *list)
 {
+	int		id;
+
+	id = list->id;
 	printf("ft_long()\n");
-	list->next = NULL;
+
+	list->id = id;
 }

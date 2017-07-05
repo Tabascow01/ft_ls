@@ -24,7 +24,6 @@ t_file		*ft_init_file()
 	t_file	*list_file;
 
 	list_file = (t_file *)ft_memalloc(sizeof(t_file));
-	list_file->file_id = 0;
 	list_file->path = NULL;
 	list_file->rights = NULL;
 	list_file->name = NULL;
@@ -42,14 +41,14 @@ t_dir		*ft_init_dir()
 	t_dir	*list_dir;
 
 	list_dir = (t_dir *)ft_memalloc(sizeof(t_dir));
-	list_dir->dir_id = 0;
 	list_dir->path = NULL;
 	list_dir->name = NULL;
 	list_dir->rights = NULL;
 	list_dir->date = NULL;
 	list_dir->user = NULL;
 	list_dir->grp = NULL;
-	list_dir->t_file = ft_init_file();
+	list_dir->t_file = NULL;
+//	list_dir->t_file = ft_init_file();
 	list_dir->next = NULL;
 	return (list_dir);
 }
@@ -67,6 +66,7 @@ t_ls				*ft_init_list()
 	list->filename = NULL;
 	list->default_dir = ".";
 	list->next = NULL;
-	list->t_dir = ft_init_dir();;
+	list->t_dir = NULL;
+//	list->t_dir = ft_init_dir();;
 	return (list);
 }
