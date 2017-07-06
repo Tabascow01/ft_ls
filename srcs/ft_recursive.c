@@ -14,23 +14,50 @@
 
 //  Probleme sur les fichiers contenue dans un dossier ou des dossiers
 //  separents les fichiers (dans l'ordre de l'ecture)
-
-static int		ft_dir_exist(t_ls *list, char *path)
+/*
+static t_dir	*ft_mv_dir(t_ls *list, char *path)
 {
-	t_ls	*begin;
+	t_dir	*tmp;
 
-	begin = list;
+	tmp = NULL;
 	while (list)
 	{
-//		if (!ft_strcmp(list->t_dir->path, path))
-//			return (1);
 		while (list->t_dir)
 		{
 			if (!ft_strcmp(list->t_dir->path, path))
-				return (1);
+			{
+				tmp = list->t_dir;
+				return (tmp);
+			}
 			list->t_dir = list->t_dir->next;
 		}
 		list = list->next;
+	}
+	return (0);
+}
+*/
+static int		ft_dir_exist(t_ls *list, char *path)
+{
+	int		id;
+	t_ls	*begin;
+	t_dir	*d;
+
+	begin = list;
+	d = list->t_dir;
+	id = begin->id;
+	printf("begin->dir[%d] - [%d]\n",id,d->dir_id);
+	while (begin)
+	{
+		while (begin->t_dir)
+		{
+			if (!ft_strcmp(begin->t_dir->path, path))
+			{
+//				printf("sim dir_id[%d]\n", begin->t_dir->dir_id);
+				return (1);
+			}
+			begin->t_dir = begin->t_dir->next;
+		}
+		begin = begin->next;
 	}
 	return (0);
 }
@@ -40,12 +67,9 @@ static int		ft_stock_file(t_ls *list, char *path)
 	int		newid;
 
 	newid = 0;
-	/*
 	if (ft_dir_exist(list, path))
-	{
-		printf("Coucou !\n");
-	}
-	*/
+		printf("dir_id[%d]\n",list->t_dir->dir_id);
+//	if (ft_mv_dir(list->t_dir, path))
 	if (list->t_dir->t_file == NULL)
 	{
 		if (!list->t_dir->t_file)
@@ -66,6 +90,7 @@ static int		ft_stock_file(t_ls *list, char *path)
 	list->t_dir->t_file->name = ft_strnew(list->dir_ent->d_namlen);
 	list->t_dir->t_file->name = ft_memcpy(list->t_dir->t_file->name, list->dir_ent->d_name, list->dir_ent->d_namlen);
 	printf("f_id[%d]\n", list->t_dir->t_file->file_id);
+	printf("f_d-id[%d]\n", list->t_dir->dir_id);
 	printf("f_path[%s]\n", list->t_dir->t_file->path);
 	printf("f_name[%s]\n", list->t_dir->t_file->name);
 	return (0);

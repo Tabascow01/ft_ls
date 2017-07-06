@@ -19,6 +19,25 @@ int					ft_init_ls(t_ls *list)
 	return (1);
 }
 
+t_ent		*ft_init_entity()
+{
+	t_ent	*list_entity;
+
+	list_entity = (t_ent *)ft_memalloc(sizeof(t_ent));
+	list_entity->next = NULL;
+	list_entity->id = 0;
+	list_entity->path = NULL;
+	list_entity->type = 0;
+	list_entity->name = NULL;
+	list_entity->size = 0;
+	list_entity->grp = NULL;
+	list_entity->user = NULL;
+	list_entity->date = NULL;
+	list_entity->rights = NULL;
+	list_entity->inode = 0;
+	return (list_entity);
+}
+
 t_file		*ft_init_file()
 {
 	t_file	*list_file;

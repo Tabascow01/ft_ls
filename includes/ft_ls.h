@@ -68,6 +68,28 @@ typedef struct		s_file
 	char			*grp;
 }					t_file;
 
+/*
+ * Entity
+*/
+typedef struct		s_ent
+{
+
+	struct	s_ent	*next;
+	int				id;
+	char			*path;
+	int				type;
+	char			*name;
+	int				size;
+	char			*grp;
+	char			*user;
+	char			*date;
+	char			*rights;
+	int				inode;
+
+}					t_ent;
+/*
+*/
+
 int		ft_stock_name(t_ls *list);
 int		ft_stock_dname(t_ls *list);
 int		ft_stock_fname(t_ls *list);
