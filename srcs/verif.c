@@ -61,10 +61,11 @@ int		ft_ispath(char *str, t_ls *list)
 	begin = NULL;
 	if (str != NULL && str[0] != '-' && nbpath < 1)
 	{
-		list->pathname = ft_strnew(ft_strlen(str));
-		list->pathname = ft_memcpy(list->pathname, str, ft_strlen(str));
-		if(ft_strlen(list->pathname) > 0)
+		list->path = ft_strnew(ft_strlen(str));
+		list->path = ft_memcpy(list->path, str, ft_strlen(str));
+		if(ft_strlen(list->path) > 0)
 		{
+			list->entity->path = list->path;
 			list->id = nbpath;
 			nbpath += 1;
 			return (1);
@@ -82,9 +83,9 @@ int		ft_ispath(char *str, t_ls *list)
 			list->option = ft_strnew(6);
 			list->option = ft_memcpy(list->option, begin->option, ft_strlen(begin->option));
 		}
-		list->pathname = ft_strnew(ft_strlen(str));
-		list->pathname = ft_memcpy(list->pathname, str, ft_strlen(str));
-		if (ft_strlen(list->pathname) > 0)
+		list->path = ft_strnew(ft_strlen(str));
+		list->path = ft_memcpy(list->path, str, ft_strlen(str));
+		if (ft_strlen(list->path) > 0)
 		{
 			list->id = nbpath;
 			nbpath += 1;

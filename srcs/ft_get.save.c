@@ -1,31 +1,28 @@
 #include "ft_ls.h"
 
-int		ft_get_dir(t_ls *lst)
+int		ft_get_dir(t_ls *list)
 {
 	DIR				*directory;
 	struct dirent	*dir_ent;
 	int				i;
-	t_ent			*list;
 
-	list = lst->entity;
 	i = 0;
 // IF NO DIR -> DEFAULT_DIR
-	if (list->path == NULL)
+	if (list->pathname == NULL)
 	{
-		list->path = ft_strnew(1);
-		list->path = ft_memcpy(list->path, list->default_dir
+		list->pathname = ft_strnew(1);
+		list->pathname = ft_memcpy(list->pathname, list->default_dir
 										, ft_strlen(list->default_dir));
 	}
 // HAS DIR
 	directory = NULL;
-	if ((directory = opendir(list->path)) > 0)
+	if ((directory = opendir(list->pathname)) > 0)
 	{
 		list->directory = directory;
 		while ((dir_ent = readdir(list->directory)) > 0)
 		{
 			list->dir_ent = dir_ent;
-			if (!ft_stock_name(list, dir_ent))
-				return (0);
+			ft_stock_name(list);
 		}
 		if (list->dir_ent != NULL)
 		{
@@ -34,17 +31,20 @@ int		ft_get_dir(t_ls *lst)
 		}
 		else
 		{
-			error_noexist(lst);
+			error_noexist(list);
 			return (0);
 		}
 	}
 	else
-		error_noexist(lst);
+		error_noexist(list);
 	return (0);
 }
 
 int		ft_get_ls(t_ls *list)
 {
+	t_ls *begin;
+
+	begin = list;
 	if (!list->next)
 	{
 		if(ft_get_dir(list))
@@ -60,17 +60,15 @@ int		ft_get_ls(t_ls *list)
 	return (1);
 }
 
-int		ft_get_file(t_ls *lst)
+int		ft_get_file(t_ls *list)
 {
 	int				i;
 	struct stat		f_stat;
-	t_ent			*list;
 
-	list = lst->entity;
 	i = 0;
 	if (list->dir_ent->d_type == 4)
 	{
-		stat(list->path, &f_stat);
+		stat(list->pathname, &f_stat);
 		list->file_stat = &f_stat;
 		return (1);
 	}

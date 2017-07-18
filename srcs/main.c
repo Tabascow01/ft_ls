@@ -23,6 +23,7 @@ int		main(int argc, char *argv[])
 	i = 0;
 	list = ft_init_list();
 	begin = list;
+	printf("start\n");
 	if (argc > 1)
 	{
 		if (!ft_vrf_option(list, argv))
@@ -31,17 +32,20 @@ int		main(int argc, char *argv[])
 			return (0);						// No such file or directory
 		while (list)
 		{
-			i++;
-			printf("id{%d}\n",list->id);
-			printf("option: %s\n", list->option);
-			printf("pathname: %s\n", list->pathname);
-			printf("nblist: %d\n", i);
-			j = 0;
-			while(list->dirname[j])
-				printf("dirname[%s]\n",list->dirname[j++]);
-			j = 0;
-			while (list->filename[j])
-				printf("filename[%s]\n",list->filename[j++]);
+			i = 0;
+			printf("list{%d}\n",j++);
+			while (list->entity)
+			{
+				printf("id{%d} - ",list->entity->id);
+				printf("type{%d} - ",list->entity->type);
+				printf("option: {%s} - ", list->entity->option);
+				printf("path: {%s} - ", list->entity->path);
+				printf("name{%s} - ",list->entity->name);
+				if (list->entity->file_stat != NULL)
+					printf("fstat_Ok - ");
+				printf("nblist: {%d}\n", i++);
+				list->entity = list->entity->next;
+			}
 			list = list->next;
 		}
 	}
@@ -51,17 +55,20 @@ int		main(int argc, char *argv[])
 			return (0);						// No such file or directory
 		while (list)
 		{
-			i++;
-			printf("id{%d}\n",list->id);
-			printf("option: %s\n", list->option);
-			printf("pathname: %s\n", list->pathname);
-			printf("nblist: %d\n", i);
-			j = 0;
-			while(list->dirname[j])
-				printf("dirname[%s]\n",list->dirname[j++]);
-			j = 0;
-			while (list->filename[j])
-				printf("filename[%s]\n",list->filename[j++]);
+			i = 0;
+			printf("list{%d}\n",j++);
+			while (list->entity)
+			{
+				printf("id{%d} - ",list->entity->id);
+				printf("type{%d} - ",list->entity->type);
+				printf("option: {%s} - ", list->entity->option);
+				printf("path: {%s} - ", list->entity->path);
+				printf("name{%s} - ",list->entity->name);
+				if (list->entity->file_stat != NULL)
+					printf("fstat_Ok - ");
+				printf("nblist: {%d}\n", i++);
+				list->entity = list->entity->next;
+			}
 			list = list->next;
 		}
 	}

@@ -4,7 +4,7 @@ int		main(void)
 {
 	DIR				*directory;
 	struct dirent	*dir_ent;
-	struct stat		file_stat;
+	struct stat		*file_stat;
 	struct passwd	*passwd;
 	uid_t			uid;
 	ssize_t			size;
@@ -13,16 +13,17 @@ int		main(void)
 	char			*strtime;
 
 	buf = NULL;
+	file_stat = ft_memalloc(sizeof(file_stat));
 	directory = opendir("./includes/");// FOR DIR
 	dir_ent = readdir(directory);
 	printf("[%s]\n",dir_ent->d_name);
 
-	stat("./Makefile", &file_stat);// FOR FILES
-	uid = file_stat.st_uid;
+	stat("./Makefile", file_stat);// FOR FILES
+	uid = file_stat->st_uid;
 	printf("[%u]\n",uid);
 
-	lstat("./Makefile", &file_stat);// FOR SYMB LINKS
-	uid = file_stat.st_uid;
+	lstat("./Makefile", file_stat);// FOR SYMB LINKS
+	uid = file_stat->st_uid;
 	printf("[%u]\n", uid);
 
 	passwd = getpwuid(uid);

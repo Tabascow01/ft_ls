@@ -30,17 +30,15 @@ typedef struct		s_ls
 	int				id;
 	DIR				*directory;
 	char			*option;
-	char			*pathname;
-	char			**filename;
-	char			**dirname;
+	char			*path;
 	int				nb_ent;
 	char			*default_dir;
 	struct dirent	*dir_ent;
 	struct stat		*file_stat;
 	struct pswwd	*passwd;
-	struct s_dir	*t_dir;
+	struct s_ent	*entity;
 }					t_ls;
-
+/*
 typedef struct		s_dir
 {
 	struct	s_dir	*next;
@@ -67,7 +65,7 @@ typedef struct		s_file
 	char			*user;
 	char			*grp;
 }					t_file;
-
+*/
 /*
  * Entity
 */
@@ -76,6 +74,7 @@ typedef struct		s_ent
 
 	struct	s_ent	*next;
 	int				id;
+	char			*option;
 	char			*path;
 	int				type;
 	char			*name;
@@ -85,26 +84,30 @@ typedef struct		s_ent
 	char			*date;
 	char			*rights;
 	int				inode;
+	int				error;
+	char			*default_dir;
+	DIR				*directory;
+	struct dirent	*dir_ent;
+	struct stat		*file_stat;
 
 }					t_ent;
 /*
 */
 
-int		ft_stock_name(t_ls *list);
-int		ft_stock_dname(t_ls *list);
-int		ft_stock_fname(t_ls *list);
+int		ft_stock_name(t_ent *list, struct dirent *entity);
+int		ft_stock_ent(t_ent *list, struct dirent *entity);
 
 int		ft_get_ls(t_ls *list);
-int		ft_get_dir(t_ls *list);
-int		ft_get_file(t_ls *list);
-int		ft_get_infos(t_ls *list);
+int		ft_get_dir(t_ls *lst);
+int		ft_get_file(t_ls *lst);
+int		ft_get_infos(t_ent *list);
 
 int		ft_ispath(char *argv, t_ls *list);
 int		ft_isoption(char *argv, t_ls *list);
 int		ft_cur_time(char **str);
 
 int		ft_rec(t_ls *list, char *path);
-int		ft_get_rec_dir(t_ls *list);
+int		ft_get_rec_dir(t_ent *list);
 
 void	ft_long(t_ls *list);
 
@@ -128,8 +131,9 @@ int		ls_core(t_ls *list);
 int		ft_vrf_option(t_ls *list, char **argv);
 
 int		ft_init_ls(t_ls *list);
-t_file	*ft_init_file();
-t_dir	*ft_init_dir();
+t_ent	*ft_init_ent();
+//t_file	*ft_init_file();
+//t_dir	*ft_init_dir();
 t_ls	*ft_init_list();
 
 void	error_noexist(t_ls *list);

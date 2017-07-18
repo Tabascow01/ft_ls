@@ -36,6 +36,7 @@ static t_dir	*ft_mv_dir(t_ls *list, char *path)
 	return (0);
 }
 */
+/*
 static int		ft_dir_exist(t_ls *list, char *path)
 {
 	int		id;
@@ -61,71 +62,65 @@ static int		ft_dir_exist(t_ls *list, char *path)
 	}
 	return (0);
 }
-
-static int		ft_stock_file(t_ls *list, char *path)
+*/
+static int		ft_stock_file(t_ent *list, char *path)
 {
-	int		newid;
+	int				newid;
+	struct dirent	*entity;
 
-	newid = 0;
-	if (ft_dir_exist(list, path))
-		printf("dir_id[%d]\n",list->t_dir->dir_id);
-//	if (ft_mv_dir(list->t_dir, path))
-	if (list->t_dir->t_file == NULL)
+	newid = list->id;
+	entity = list->dir_ent;
+	if (newid > 0)
 	{
-		if (!list->t_dir->t_file)
-			list->t_dir->t_file = ft_init_file();
-		list->t_dir->t_file->file_id = 0;
+		while (list->next)
+		{
+			list = list->next;
+			newid++;
+		}
+		list->next = ft_init_ent();
+		list->next->dir_ent = entity;
+		list->next->option = ft_strnew(ft_strlen(list->option));
+		list->next->option = ft_memcpy(list->next->option, list->option, ft_strlen(list->option));
+		list = list->next;
 	}
-	else
-	{
-		newid = list->t_dir->t_file->file_id;
-		if (!list->t_dir->t_file->next)
-			list->t_dir->t_file->next = ft_init_file();
-		list->t_dir->t_file = list->t_dir->t_file->next; // !
-		list->t_dir->t_file->file_id = newid + 1;
-	}
-	list->t_dir->t_file->path = ft_strnew(ft_strlen(path));
-	list->t_dir->t_file->path = ft_memcpy(list->t_dir->t_file->path, path, ft_strlen(path));
+	list->id = newid + 1;
+	list->path = ft_strnew(ft_strlen(path));
+	list->path = ft_memcpy(list->path, path, ft_strlen(path));
 //	list->t_dir->t_file->file_id = nbfile;
-	list->t_dir->t_file->name = ft_strnew(list->dir_ent->d_namlen);
-	list->t_dir->t_file->name = ft_memcpy(list->t_dir->t_file->name, list->dir_ent->d_name, list->dir_ent->d_namlen);
-	printf("f_id[%d]\n", list->t_dir->t_file->file_id);
-	printf("f_d-id[%d]\n", list->t_dir->dir_id);
-	printf("f_path[%s]\n", list->t_dir->t_file->path);
-	printf("f_name[%s]\n", list->t_dir->t_file->name);
+	list->name = ft_strnew(list->dir_ent->d_namlen);
+	list->name = ft_memcpy(list->name, list->dir_ent->d_name, list->dir_ent->d_namlen);
+	list->type = list->dir_ent->d_type;
+//	printf("f_id[%d] - f_path[%s] - f_name[%s] - f_type[%d]\n", list->id, list->path, list->name, list->type);
 	return (0);
 }
 
-static int	ft_stock_dir(t_ls *list, char *path)
+static int	ft_stock_dir(t_ent *list, char *path)
 {
-	int		newid;
+	int				newid;
+	struct dirent	*entity;
 
-	newid = 0;
-	if (list->t_dir == NULL)
+	newid = list->id;
+	entity = list->dir_ent;
+	if (newid > 0)
 	{
-		if (!list->t_dir)
-			list->t_dir = ft_init_dir();
-		list->t_dir->dir_id = 0;
+		while (list->next)
+		{
+			list = list->next;
+			newid++;
+		}
+		list->next = ft_init_ent();
+		list->next->dir_ent = entity;
+		list->next->option = ft_strnew(ft_strlen(list->option));
+		list->next->option = ft_memcpy(list->next->option, list->option, ft_strlen(list->option));
+		list = list->next;
 	}
-	else
-	{
-		newid = list->t_dir->dir_id;
-		if (!list->t_dir->next)
-			list->t_dir->next = ft_init_dir();
-		list->t_dir = list->t_dir->next;
-		list->t_dir->dir_id = newid + 1;
-	}
-	if (!list->t_dir)
-		list->t_dir = ft_init_dir();
-	list->t_dir->path = ft_strnew(ft_strlen(path));
-	list->t_dir->path = ft_memcpy(list->t_dir->path, path, ft_strlen(path));
-//	list->t_dir->dir_id = nbdir;
-	list->t_dir->name = ft_strnew(list->dir_ent->d_namlen);
-	list->t_dir->name = ft_memcpy(list->t_dir->name, list->dir_ent->d_name, list->dir_ent->d_namlen);
-	printf("d_id[%d]\n", list->t_dir->dir_id);
-	printf("d_path[%s]\n", list->t_dir->path);
-	printf("d_name[%s]\n", list->t_dir->name);
-
+	list->id = newid + 1;
+	list->path = ft_strnew(ft_strlen(path));
+	list->path = ft_memcpy(list->path, path, ft_strlen(path));
+	list->name = ft_strnew(list->dir_ent->d_namlen);
+	list->name = ft_memcpy(list->name, list->dir_ent->d_name, list->dir_ent->d_namlen);
+	list->type = list->dir_ent->d_type;
+//	printf("d_id[%d] - d_path[%s] - d_name[%s] - d_type[%d]\n", list->id, list->path, list->name, list->type);
 	return (0);
 }
 
@@ -135,25 +130,26 @@ int		ft_rec(t_ls *list, char *path)
 	DIR				*directory;
 	struct dirent	*dir_ent;
 	char			*finalpath;
+	t_ent			*ent;
 
+	ent = list->entity;
 	if (!(directory = opendir(path)))
 		return (0);
-	while ((dir_ent = readdir(directory)))
+	while ((dir_ent = readdir(directory)) > 0)
 	{
-		list->dir_ent = dir_ent;
+		ent->dir_ent = dir_ent;
 		if (ft_strcmp(dir_ent->d_name,".") != 0 && ft_strcmp(dir_ent->d_name, "..") != 0
-				&& dir_ent->d_type == DT_DIR && dir_ent->d_name[0] != '.') // tout les directory
+				&& dir_ent->d_type == DT_DIR) // tout les directory
 		{
 			finalpath = ft_strnew(ft_strlen(path));
 			finalpath = ft_strcpy(finalpath, path);
 			finalpath = ft_strjoin(finalpath, "/");
 			finalpath = ft_strjoin(finalpath, dir_ent->d_name);
-			ft_stock_dir(list, finalpath);
+			ft_stock_dir(ent, finalpath);
 			ft_rec(list, finalpath);
 		}
-		else if (ft_strcmp(dir_ent->d_name, ".") && ft_strcmp(dir_ent->d_name, "..")
-					&& list->t_dir != NULL) // tout les files
-			ft_stock_file(list, path);
+		else if (ft_strcmp(dir_ent->d_name, ".") && ft_strcmp(dir_ent->d_name, "..")) // tout les files
+			ft_stock_file(ent, path);
 	}
 	closedir(directory);
 	return (0);

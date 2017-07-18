@@ -15,9 +15,9 @@
 void	error_noexist(t_ls *list)
 {
 	ft_putstr_fd("ls: ", 2);
-	ft_putstr_fd(list->pathname, 2);
+	ft_putstr_fd(list->path, 2);
 	ft_putendl_fd(": No such file or directory", 2);
-	if (!ft_strcmp(list->pathname, list->default_dir))
+	if (!ft_strcmp(list->path, list->default_dir))
 		exit(-1);
 }
 

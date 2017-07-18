@@ -19,7 +19,7 @@ int					ft_init_ls(t_ls *list)
 	return (1);
 }
 
-t_ent		*ft_init_entity()
+t_ent		*ft_init_ent()
 {
 	t_ent	*list_entity;
 
@@ -35,9 +35,14 @@ t_ent		*ft_init_entity()
 	list_entity->date = NULL;
 	list_entity->rights = NULL;
 	list_entity->inode = 0;
+	list_entity->error = 0;
+	list_entity->default_dir = ".";
+	list_entity->directory = NULL;
+	list_entity->dir_ent = NULL;
+	list_entity->file_stat = NULL;
 	return (list_entity);
 }
-
+/*
 t_file		*ft_init_file()
 {
 	t_file	*list_file;
@@ -71,6 +76,7 @@ t_dir		*ft_init_dir()
 	list_dir->next = NULL;
 	return (list_dir);
 }
+*/
 
 t_ls				*ft_init_list()
 {
@@ -80,12 +86,14 @@ t_ls				*ft_init_list()
 	list = (t_ls *)ft_memalloc(sizeof(t_ls));
 	list->id = id;
 	list->option = 0;
-	list->pathname = NULL;
-	list->dirname = NULL;
-	list->filename = NULL;
+	list->path = NULL;
 	list->default_dir = ".";
 	list->next = NULL;
-	list->t_dir = NULL;
-//	list->t_dir = ft_init_dir();;
+	list->entity = ft_init_ent();
+	list->directory = NULL;
+	list->dir_ent = NULL;
+	list->file_stat = NULL;
+	list->passwd = NULL;
 	return (list);
 }
+

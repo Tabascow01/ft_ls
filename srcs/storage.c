@@ -1,74 +1,36 @@
 #include "ft_ls.h"
 
-
-int		ft_stock_fname(t_ls *list)
+int		ft_stock_ent(t_ent *list, struct dirent *entity)
 {
-	int			i;
-	static int	pass;
+	int		newid;
 
-	i = 0;
-	if (list->filename == NULL)
+	newid = list->id;
+	if (newid > 0)
 	{
-		if (pass > 0)
-			pass = 0;
-		list->filename = (char **)ft_memalloc(sizeof(char *) * 256);
-		(*list->filename) = ft_strnew(list->dir_ent->d_namlen);
-		(*list->filename) = ft_memcpy((*list->filename), list->dir_ent->d_name,
-										list->dir_ent->d_namlen);
+		while (list->next)
+		{
+			list = list->next;
+			newid++;
+		}
+		list->next = ft_init_ent();
+		list->next->dir_ent = entity;
+		list->next->path = ft_strnew(ft_strlen(list->path));
+		list->next->path = ft_memcpy(list->next->path, list->path, ft_strlen(list->path));
+		list = list->next;
 	}
-	else if (list->filename != NULL)
-	{
-		list->filename[pass] = ft_strnew(list->dir_ent->d_namlen);
-		list->filename[pass] = ft_memcpy(list->filename[pass], list->dir_ent->d_name,
-										list->dir_ent->d_namlen);
-	}
-	pass++;
-//	list->filename[pass] = 0;
-	return (0);
+	list->name = ft_strnew(list->dir_ent->d_namlen);
+	list->name = ft_memcpy(list->name, list->dir_ent->d_name, list->dir_ent->d_namlen);
+	list->type = list->dir_ent->d_type;
+	list->id = newid + 1;
+	return (1);
 }
 
-
-int		ft_stock_dname(t_ls *list)
-{
-	int			i;
-	static int	pass;
-
-	i = 0;
-	if (list->dirname == NULL)
-	{
-		if (pass > 0)
-			pass = 0;
-		list->dirname = (char **)ft_memalloc(sizeof(char *) * 256);
-		(*list->dirname) = ft_strnew(list->dir_ent->d_namlen);
-		(*list->dirname) = ft_memcpy((*list->dirname), list->dir_ent->d_name,
-										list->dir_ent->d_namlen);
-	}
-	else if (list->dirname != NULL)
-	{
-		list->dirname[pass] = ft_strnew(list->dir_ent->d_namlen);
-		list->dirname[pass] = ft_memcpy(list->dirname[pass], list->dir_ent->d_name,
-										list->dir_ent->d_namlen);
-	}
-	pass++;
-//	list->dirname[pass] = 0;
-	return (0);
-}
-
-
-int		ft_stock_name(t_ls *list)
+int		ft_stock_name(t_ent *list, struct dirent *entity)
 {
 	if (list->dir_ent != NULL)
 	{
-		if (list->dir_ent->d_type == 4)
-			ft_stock_dname(list);
-		else
-			ft_stock_fname(list);
+		if (ft_stock_ent(list, entity))
+			return (1);
 	}
-	return (0);
-}
-
-int		ft_stock_file_infos(t_ls *list)
-{
-	list->next = NULL;
 	return (0);
 }

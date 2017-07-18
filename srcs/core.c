@@ -14,34 +14,29 @@
 
 int		ft_proc_option(t_ls *list)
 {
-	int		i;
-	t_ls *begin;
+	t_ls	*begin;
 
 	begin = list;
-	if (!ft_init_ls(list))
+	if (!ft_strchr(begin->option, 'R'))
+		if (!ft_init_ls(list))
+			return (0);
+	if (list->option == NULL)
 		return (0);
-	while (list)
+	while (list)// WRONG ERROR LOOP - TOO MANY
 	{
-		i = 0;
-		while (begin->option[i])
-		{
-			if (ft_vrf_all(begin->option[i]))// -a
-				ft_all(list);
-			if (ft_vrf_rec(begin->option[i]))// -R
-				ft_rec(list, list->pathname);
-			if (ft_vrf_long(begin->option[i]))// -l
-				ft_long(list);
-			if (ft_vrf_rev(begin->option[i]))// -r
-				ft_rev(list);
-			if (ft_vrf_time(begin->option[i]))// -t
-				ft_time(list);
-			i++;
-		}
+		if (ft_strchr(list->option, 'a'))// -a
+			ft_all(list);
+		if (ft_strchr(list->option, 'R'))// -R
+			ft_rec(list, list->path);
+		if (ft_strchr(list->option, 'l'))// -l
+			ft_long(list);
+		if (ft_strchr(list->option, 'r'))// -r
+			ft_rev(list);
+		if (ft_strchr(list->option, 't'))// -t
+			ft_time(list);
 		list = list->next;
 	}
-	if (i > 0)
-		return (1);
-	return (0);
+	return (1);
 }
 
 int		ls_core(t_ls *list)

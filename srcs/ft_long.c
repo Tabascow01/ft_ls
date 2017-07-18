@@ -14,10 +14,15 @@
 
 void	ft_long(t_ls *list)
 {
-	int		id;
+	struct stat		fstat;
+	t_ent			*entity;
 
-	id = list->id;
-	printf("ft_long()\n");
-
-	list->id = id;
+	entity = list->entity;
+	while (entity)
+	{
+		stat(entity->path, &fstat);
+		entity->file_stat = &fstat;
+//		printf("fstat{%u}\n",entity->file_stat->st_uid);
+		entity = entity->next;
+	}
 }
