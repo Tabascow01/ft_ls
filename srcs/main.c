@@ -21,9 +21,9 @@ int		main(int argc, char *argv[])
 
 	j = 0;
 	i = 0;
-	list = ft_init_list();
+	list = ft_init_list(argc);
 	begin = list;
-	printf("start\n");
+	printf("argc{%d}\n", argc);
 	if (argc > 1)
 	{
 		if (!ft_vrf_option(list, argv))

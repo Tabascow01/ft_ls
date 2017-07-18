@@ -17,19 +17,20 @@ int		ft_proc_option(t_ls *list)
 	t_ls	*begin;
 
 	begin = list;
-	if (!ft_strchr(begin->option, 'R'))
+	if (list->argc < 3 || !ft_strchr(begin->option, 'R'))
 		if (!ft_init_ls(list))
 			return (0);
 	if (list->option == NULL)
 		return (0);
-	while (list)// WRONG ERROR LOOP - TOO MANY
+	while (list)
 	{
-		if (ft_strchr(list->option, 'a'))// -a
-			ft_all(list);
+
 		if (ft_strchr(list->option, 'R'))// -R
 			ft_rec(list, list->path);
 		if (ft_strchr(list->option, 'l'))// -l
 			ft_long(list);
+		if (ft_strchr(list->option, 'a'))// -a
+			ft_all(list);
 		if (ft_strchr(list->option, 'r'))// -r
 			ft_rev(list);
 		if (ft_strchr(list->option, 't'))// -t

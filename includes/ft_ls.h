@@ -28,6 +28,7 @@ typedef struct		s_ls
 {
 	struct s_ls		*next;
 	int				id;
+	int				argc;
 	DIR				*directory;
 	char			*option;
 	char			*path;
@@ -134,7 +135,7 @@ int		ft_init_ls(t_ls *list);
 t_ent	*ft_init_ent();
 //t_file	*ft_init_file();
 //t_dir	*ft_init_dir();
-t_ls	*ft_init_list();
+t_ls	*ft_init_list(int argc);
 
 void	error_noexist(t_ls *list);
 void	error_illegal_option(t_ls *list);

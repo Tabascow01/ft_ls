@@ -76,7 +76,7 @@ int		ft_ispath(char *str, t_ls *list)
 		begin = list;
 		while (list->next)
 			list = list->next;
-		list->next = ft_init_list();
+		list->next = ft_init_list(list->argc);
 		list = list->next;
 		if (begin->option != NULL)
 		{
@@ -121,39 +121,4 @@ int		ft_vrf_option(t_ls *list, char **argv)
 		}i++;
 	}
 	return (1);
-}
-
-int		ft_vrf_rec(char c)
-{
-	if (c == 'R')
-		return (1);
-	return (0);
-}
-
-int		ft_vrf_long(char c)
-{
-	if (c == 'l')
-		return (1);
-	return (0);
-}
-
-int		ft_vrf_all(char c)
-{
-	if (c == 'a')
-		return (1);
-	return (0);
-}
-
-int		ft_vrf_rev(char c)
-{
-	if (c == 'r')
-		return (1);
-	return (0);
-}
-
-int		ft_vrf_time(char c)
-{
-	if (c == 't')
-		return (1);
-	return (0);
 }

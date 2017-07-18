@@ -78,13 +78,14 @@ t_dir		*ft_init_dir()
 }
 */
 
-t_ls				*ft_init_list()
+t_ls				*ft_init_list(int argc)
 {
 	t_ls		*list;
 	static int	id;
 
 	list = (t_ls *)ft_memalloc(sizeof(t_ls));
 	list->id = id;
+	list->argc = argc;
 	list->option = 0;
 	list->path = NULL;
 	list->default_dir = ".";
