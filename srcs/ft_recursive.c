@@ -80,8 +80,12 @@ int		ft_rec(t_ls *list, char *path)
 	char			*finalpath;
 	t_ent			*ent;
 
-	printf("1-0\n");
 	ent = list->entity;
+	if (path == NULL)
+	{
+		path = ft_strnew(1);
+		path = ft_memcpy(path,list->default_dir, 1);
+	}
 	if (!(directory = opendir(path)))
 	{
 		perror("Directory error");

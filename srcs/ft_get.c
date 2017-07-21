@@ -48,8 +48,9 @@ int		ft_get_ls(t_ls *list)
 	if (!list->next)
 	{
 		if(ft_get_dir(list))
-			ft_get_file(list);
-		return (1);
+			if (!ft_get_file(list))
+				return (0);
+			return (1);
 	}
 	while (list)
 	{
@@ -74,5 +75,5 @@ int		ft_get_file(t_ls *lst)
 		list->file_stat = &f_stat;
 		return (1);
 	}
-	return (0);
+	return (1);
 }

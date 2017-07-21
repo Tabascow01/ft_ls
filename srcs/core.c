@@ -24,7 +24,6 @@ int		ft_proc_option(t_ls *list)
 		return (0);
 	while (list)
 	{
-
 		if (ft_strchr(list->option, 'R'))// -R
 			ft_rec(list, list->path);
 		if (ft_strchr(list->option, 'l'))// -l

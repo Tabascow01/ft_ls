@@ -127,7 +127,11 @@ int		ft_vrf_all(char c);
 int		ft_vrf_rev(char c);
 int		ft_vrf_time(char c);
 
+int		ft_max_len(t_ls *list);
+
 int		ls_core(t_ls *list);
+int		ft_display_optcore(t_ls *list, int max_len);
+int		ft_display_smpcore(t_ls *list, int max_len);
 
 int		ft_vrf_option(t_ls *list, char **argv);
 
