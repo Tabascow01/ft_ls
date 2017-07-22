@@ -28,12 +28,6 @@ int		ft_proc_option(t_ls *list)
 			ft_rec(list, list->path);
 		if (ft_strchr(list->option, 'l'))// -l
 			ft_long(list);
-		if (ft_strchr(list->option, 'a'))// -a
-			ft_all(list);
-		if (ft_strchr(list->option, 'r'))// -r
-			ft_rev(list);
-		if (ft_strchr(list->option, 't'))// -t
-			ft_time(list);
 		list = list->next;
 	}
 	return (1);

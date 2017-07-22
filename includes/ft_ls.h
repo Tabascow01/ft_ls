@@ -27,6 +27,7 @@
 typedef struct		s_ls
 {
 	struct s_ls		*next;
+	struct s_ls		*prev;
 	int				id;
 	int				argc;
 	DIR				*directory;
@@ -39,41 +40,12 @@ typedef struct		s_ls
 	struct pswwd	*passwd;
 	struct s_ent	*entity;
 }					t_ls;
-/*
-typedef struct		s_dir
-{
-	struct	s_dir	*next;
-	int				dir_id;
-	char			*path;
-	char			*name;
-	char			*rights;
-	char			*date;
-	char			*user;
-	char			*grp;
-	struct s_file	*t_file;
-}					t_dir;
 
-typedef struct		s_file
-{
-	struct	s_file	*next;
-	int				file_id;
-	char			*path;
-	char			*rights;
-//	char			*uid;// ???
-	char			*name;
-	char			*date;
-	char			*size;
-	char			*user;
-	char			*grp;
-}					t_file;
-*/
-/*
- * Entity
-*/
 typedef struct		s_ent
 {
 
 	struct	s_ent	*next;
+	struct	s_ent	*prev;
 	int				id;
 	char			*option;
 	char			*path;
@@ -92,8 +64,6 @@ typedef struct		s_ent
 	struct stat		*file_stat;
 
 }					t_ent;
-/*
-*/
 
 int		ft_stock_name(t_ent *list, struct dirent *entity);
 int		ft_stock_ent(t_ent *list, struct dirent *entity);
@@ -137,8 +107,6 @@ int		ft_vrf_option(t_ls *list, char **argv);
 
 int		ft_init_ls(t_ls *list);
 t_ent	*ft_init_ent();
-//t_file	*ft_init_file();
-//t_dir	*ft_init_dir();
 t_ls	*ft_init_list(int argc);
 
 void	error_noexist(t_ls *list);

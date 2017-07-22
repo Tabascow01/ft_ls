@@ -57,6 +57,7 @@ int		ft_ispath(char *str, t_ls *list)
 {
 	static int	nbpath;
 	t_ls		*begin;
+	t_ls		*prev_lst;
 
 	begin = NULL;
 	if (str != NULL && str[0] != '-' && nbpath < 1)
@@ -76,8 +77,10 @@ int		ft_ispath(char *str, t_ls *list)
 		begin = list;
 		while (list->next)
 			list = list->next;
+		prev_lst = list;
 		list->next = ft_init_list(list->argc);
 		list = list->next;
+		list->prev = prev_lst;
 		if (begin->option != NULL)
 		{
 			list->option = ft_strnew(6);

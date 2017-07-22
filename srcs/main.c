@@ -23,6 +23,7 @@ int		main(int argc, char *argv[])
 	j = 0;
 	i = 0;
 	list = ft_init_list(argc);
+	list->prev = NULL;
 	begin = list;
 	max_len = 0;
 	if (argc > 1)

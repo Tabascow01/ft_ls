@@ -3,6 +3,7 @@
 int		ft_stock_ent(t_ent *list, struct dirent *entity)
 {
 	int		newid;
+	t_ent	*prev_lst;
 
 	newid = list->id;
 	if (newid > 0)
@@ -12,11 +13,13 @@ int		ft_stock_ent(t_ent *list, struct dirent *entity)
 			list = list->next;
 			newid++;
 		}
+		prev_lst = list;
 		list->next = ft_init_ent();
 		list->next->dir_ent = entity;
 		list->next->path = ft_strnew(ft_strlen(list->path));
 		list->next->path = ft_memcpy(list->next->path, list->path, ft_strlen(list->path));
 		list = list->next;
+		list->prev = prev_lst;
 	}
 	list->name = ft_strnew(list->dir_ent->d_namlen);
 	list->name = ft_memcpy(list->name, list->dir_ent->d_name, list->dir_ent->d_namlen);

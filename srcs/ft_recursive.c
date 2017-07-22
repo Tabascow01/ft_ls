@@ -16,6 +16,7 @@ static int		ft_stock_file(t_ent *list, char *path)
 {
 	int				newid;
 	struct dirent	*entity;
+	t_ent			*prev_lst;
 
 	newid = list->id;
 	entity = list->dir_ent;
@@ -26,11 +27,13 @@ static int		ft_stock_file(t_ent *list, char *path)
 			list = list->next;
 			newid++;
 		}
+		prev_lst = list;
 		list->next = ft_init_ent();
 		list->next->dir_ent = entity;
 		list->next->option = ft_strnew(ft_strlen(list->option));
 		list->next->option = ft_memcpy(list->next->option, list->option, ft_strlen(list->option));
 		list = list->next;
+		list->prev = prev_lst;
 	}
 	list->id = newid + 1;
 	list->path = ft_strnew(ft_strlen(path));
@@ -46,6 +49,7 @@ static int	ft_stock_dir(t_ent *list, char *path)
 {
 	int				newid;
 	struct dirent	*entity;
+	t_ent			*prev_lst;
 
 	newid = list->id;
 	entity = list->dir_ent;
@@ -56,11 +60,13 @@ static int	ft_stock_dir(t_ent *list, char *path)
 			list = list->next;
 			newid++;
 		}
+		prev_lst = list;
 		list->next = ft_init_ent();
 		list->next->dir_ent = entity;
 		list->next->option = ft_strnew(ft_strlen(list->option));
 		list->next->option = ft_memcpy(list->next->option, list->option, ft_strlen(list->option));
 		list = list->next;
+		list->prev = prev_lst;
 	}
 	list->id = newid + 1;
 	list->path = ft_strnew(ft_strlen(path));

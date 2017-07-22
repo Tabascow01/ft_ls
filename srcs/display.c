@@ -24,36 +24,18 @@ int		ft_max_len(t_ls *list)
 
 int		ft_display_optcore(t_ls *list, int max_len)
 {
-	t_ent	*entity;
-
-	printf("len_m[%d]\n",max_len);
-	if (list->entity->name == NULL && list->entity->type == 0)
+	if (!list || !list->entity || !list->option)
 		return (0);
-	if (list && list->entity)
+	printf("{%d}\n",max_len);
+	while (list)
 	{
-		while (list)
-		{
-			entity = list->entity;
-			while (entity)
-			{
-				if (ft_strcmp(entity->name,".")
-						&& ft_strcmp(entity->name, "..")
-						&& entity->name[0] != '.')
-				{
-					printf("id {%d} - ",entity->id);
-					printf("type {%d} - ",entity->type);
-					printf("option {%s} - ", list->option);
-					printf("path{%s} - ",entity->path);
-					if (entity->file_stat != NULL)
-						printf("fstat_Ok - ");
-					printf("name{%s}\n",entity->name);
-				}
-				entity = entity->next;
-			}
-			list = list->next;
-			printf("\n");
-		}
-		return (1);
+		if (ft_strchr(list->option, 'a'))
+			ft_all(list);
+		if (ft_strchr(list->option, 'r'))
+			ft_rev(list);
+		if (ft_strchr(list->option, 't'))
+			ft_time(list);
+		list = list->next;
 	}
 	return (0);
 }
