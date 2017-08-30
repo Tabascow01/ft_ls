@@ -39,7 +39,7 @@ void	ft_wdgt_7(t_flags *list, t_precs *lst, int *digittmp, int *dgit)
 
 void	ft_wdgt_6(t_flags *list, t_precs *lst, int *dgit)
 {
-	if (dgit > 0)
+	if (*dgit > 0)
 	{
 		lst->wtmpargs = ft_wstrnew((*dgit) + 1);
 		while (list->wargs[lst->i] && lst->i < (*dgit))

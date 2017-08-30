@@ -60,12 +60,12 @@ void	ft_wdgt_3(t_precs *lst, int *digittmp, wchar_t **newarg)
 
 void	ft_wdgt_2(t_flags *list, t_precs *lst, int *digittmp, int *dgit)
 {
-	if (((list->wargs[0] == '-' || list->wargs[0] == '+') && dgit >= 0))
+	if (((list->wargs[0] == '-' || list->wargs[0] == '+') && *dgit >= 0))
 		lst->size -= 1;
-	if (digittmp > dgit && lst->size > 0 && lst->size <= (*dgit) && dgit > 0
+	if (digittmp > dgit && lst->size > 0 && lst->size <= (*dgit) && *dgit > 0
 			&& list->wargs[0] != '-' && list->wargs[0] != '+')
 		(*digittmp) = (*digittmp) - ((*dgit) - lst->size) + 1;
-	else if ((*digittmp) > (*dgit) && (*digittmp) > lst->size && dgit > 0
+	else if ((*digittmp) > (*dgit) && (*digittmp) > lst->size && *dgit > 0
 			&& list->wargs[0] != '-' && list->wargs[0] != '+')
 		digittmp += 1;
 	else if ((list->wargs[0] == '-' || list->wargs[0] == '+')

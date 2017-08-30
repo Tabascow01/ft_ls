@@ -17,11 +17,7 @@ int		main(int argc, char *argv[])
 	t_ls	*list;
 	t_ls	*begin;
 	int		max_len;
-	int		i;//
-	int		j;//
 
-	j = 0;
-	i = 0;
 	list = ft_init_list(argc);
 	list->prev = NULL;
 	begin = list;

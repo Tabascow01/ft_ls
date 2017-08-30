@@ -22,10 +22,8 @@ static void		ft_free_hex(t_flags *list)
 void			ft_save_hex_low(t_flags *list, va_list args)
 {
 	char	*tmp;
-	int		i;
 	int		temp;
 
-	i = 0;
 	temp = 0;
 	if (list->option != 0 || list->dbloption != 0)
 		ft_process_option(list, args, 'x');
@@ -50,9 +48,7 @@ void			ft_save_hex_up(t_flags *list, va_list args)
 {
 	char	*tmp;
 	int		temp;
-	int		i;
 
-	i = 0;
 	temp = 0;
 	if (list->option != 0 || list->dbloption != 0)
 		ft_process_option(list, args, 'X');

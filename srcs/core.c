@@ -35,9 +35,6 @@ int		ft_proc_option(t_ls *list)
 
 int		ls_core(t_ls *list)
 {
-	int	 i;
-
-	i = 0;
 	if (list->option)
 	{
 		if(!ft_proc_option(list))

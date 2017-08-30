@@ -103,7 +103,7 @@ void	ft_return_size_nn(t_flags *list)
 	else if (list->sign > 0 && list->precision > 0)
 		list->size += (int)ft_strlen(list->args)
 			- (int)ft_strlen(list->digit) - list->sign - 2;
-	else if (list->digit > 0 && list->hash == '#' && list->conv != 'p')
+	else if (list->digit != NULL && list->hash == '#' && list->conv != 'p')
 	{
 		list->size += (int)ft_strlen(list->args)
 			- (int)ft_strlen(list->digit) - 3;

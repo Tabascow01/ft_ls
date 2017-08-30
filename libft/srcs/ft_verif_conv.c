@@ -103,13 +103,9 @@ static int		ft_verif_cnv_n(t_flags *list, int *idxtmp, va_list args)
 int				ft_verif_conv(t_flags *list, va_list args)
 {
 	int		idxtmp;
-	int		pass;
-	int		passnoconv;
 	int		ret;
 
-	pass = 0;
 	ret = 0;
-	passnoconv = 0;
 	idxtmp = list->index;
 	while (list->format[idxtmp] != '\0' && ret == 0)
 	{

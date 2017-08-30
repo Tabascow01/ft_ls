@@ -23,7 +23,7 @@ static void		ft_size_conv_n(t_flags *list)
 static void		ft_size_conv(t_flags *list)
 {
 	ft_size_conv_n(list);
-	if (list->digit > 0 && list->left == 0)
+	if (list->digit != NULL && list->left == 0)
 		ft_return_size_nn(list);
 	else if (list->space > 0 && list->sign == 0 && list->noconv > 0)
 		list->size += 1 - list->space - 2;
@@ -55,7 +55,7 @@ static void		ft_size_percent(t_flags *list)
 		list->size += (int)ft_strlen(list->args) -
 			(int)ft_strlen(list->digit) - list->nbleft - 2;
 	}
-	else if (list->digit > 0 && list->zero == '0')
+	else if (list->digit != NULL && list->zero == '0')
 		list->size += (int)ft_strlen(list->args)
 			- (int)ft_strlen(list->digit) - 2;
 	else if (list->space > 0)

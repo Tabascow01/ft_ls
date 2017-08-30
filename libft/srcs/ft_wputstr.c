@@ -15,11 +15,9 @@
 int		ft_wputstr(wchar_t *wstr)
 {
 	int		i;
-	int		tmp;
 	int		bytes;
 
 	i = 0;
-	tmp = 0;
 	bytes = 0;
 	while (wstr[i] != '\0')
 		bytes += ft_wputchar(wstr[i++]);

@@ -30,7 +30,7 @@ int		ft_print_wchr(t_flags *list, wchar_t c)
 		list->bytes = ft_wputstr(list->wargs);
 	ft_return_wsize(list);
 	ft_strdel((void *)&list->wargs);
-	if (list->digit > 0)
+	if (list->digit != NULL)
 		ft_strdel(&list->digit);
 	ft_clear_flags(list);
 	return (0);

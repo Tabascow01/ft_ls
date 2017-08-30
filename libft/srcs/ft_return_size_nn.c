@@ -14,7 +14,7 @@
 
 void	ft_return_size_nnnn2(t_flags *list)
 {
-	if (list->zero == '0' && list->digit > 0)
+	if (list->zero == '0' && list->digit != NULL)
 		list->size += (int)ft_strlen(list->args)
 			- list->nbleft - (int)ft_strlen(list->digit) - 2;
 	else if (list->conv == 'c' && ft_atoi(list->args) == 0)

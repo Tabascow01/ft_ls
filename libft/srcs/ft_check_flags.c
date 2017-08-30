@@ -16,7 +16,7 @@ int		ft_check_flags(t_flags *list)
 {
 	if (list->space > 0 || list->sign > 0 || list->zero == '0'
 			|| list->hash == '#' || list->precision > 0
-			|| list->left == 1 || list->digit > 0)
+			|| list->left == 1 || list->digit != NULL)
 		return (1);
 	return (0);
 }

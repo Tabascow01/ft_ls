@@ -17,7 +17,7 @@ int		ft_print_oct(t_flags *list)
 	ft_putstr(list->args);
 	ft_return_size(list);
 	ft_strdel(&list->args);
-	if (list->digit > 0)
+	if (list->digit != NULL)
 		ft_strdel(&list->digit);
 	ft_clear_flags(list);
 	return (0);

@@ -15,6 +15,7 @@
 
 # define BUFF_SIZE 81820
 
+# include <inttypes.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
